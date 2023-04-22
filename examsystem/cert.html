@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>结业证书</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      color: #337ab7;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 20px 0;
+    }
+    button {
+      background-color: #337ab7;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #23527c;
+    }
+    .certificate {
+      width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .certificate p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="certificate">
+  <h1>结业证书</h1>
+  <p>这证明</p>
+  <p>姓名： <span id="name"></span></p>
+  <p>考号： <span id="id"></span></p>
+  <p>已经成功通过了本培训课程。</p>
+  <p>感谢您的参与。</p>
+  <button onclick="printCertificate()">打印证书</button>
+</div>
+<script>
+  // 获取姓名和考号的值
+  const name = localStorage.getItem('name');
+  const id = localStorage.getItem('id');
+
+  // 在页面上显示姓名和考号的值
+  document.getElementById('name').textContent = name;
+  document.getElementById('id').textContent = id;
+
+  // 打印证书
+  function printCertificate() {
+    window.print();
+  }
+</script>
+</body>
+</html>

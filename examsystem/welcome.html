@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>欢迎进入考试</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      color: #337ab7;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 20px 0;
+    }
+    button {
+      background-color: #337ab7;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #23527c;
+    }
+  </style>
+</head>
+<body>
+<h1>欢迎进入考试</h1>
+<p>请输入您的姓名和考号以进入考试：</p>
+<form action="exampage1-1.html" method="get">
+  <label for="name">姓名：</label>
+  <input type="text" id="name" name="name" required>
+  <br>
+  <label for="id">考号：</label>
+  <input type="text" id="id" name="id" required>
+  <br>
+  <button id="start-button" type="submit">进入考试</button>
+</form>
+<script>
+  // 获取开始考试按钮
+  const startButton = document.getElementById('start-button');
+
+  // 添加单击事件
+  startButton.addEventListener('click', function(event) {
+    // 防止默认行为
+    // 获取姓名和考号
+    const name = document.getElementById('name').value;
+    const id = document.getElementById('id').value;
+
+    // 将姓名和考号存储到本地存储中
+    localStorage.setItem('name', name);
+    localStorage.setItem('id', id);
+
+    // 跳转到下一页
+    window.location.href = 'exampage1-1.html';
+  });
+</script>
+</body>
+</html>
