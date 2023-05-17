@@ -1,0 +1,90 @@
+<head>
+  <meta charset="UTF-8">
+  <!-- 其他标签 -->
+  <style>
+    #message {
+      display: none;
+      position: absolute;
+      top: 150px;
+      left: 100px;
+      z-index: 1;
+      background-color: #e80a0a;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px #888;
+    }
+
+    #message:before {
+      content: "";
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 10px 0 10px;
+      border-color: #fff transparent transparent transparent;
+      top: -10px;
+      left: 50%;
+      margin-left: -10px;
+    }
+  </style>
+</head>
+<body>
+<div style="position: relative;">
+  <img src="exam3-1.png" usemap="#image-map">
+
+  <map name="image-map">
+      <area target="" alt="" title="" href="" coords="187,302,285,345" shape="rect">
+      <area target="" alt="" title="" href="" coords="187,358,284,399" shape="rect">
+      <area target="" alt="" title="" href="" coords="183,410,373,452" shape="rect">
+      <area target="" alt="" title="" href="" coords="183,463,325,498" shape="rect">
+      <area target="" alt="连锁终端退库" title="连锁终端退库" href="" coords="183,515,327,556" shape="rect">
+      <area target="" alt="" title="" href="" coords="410,310,511,345" shape="rect">
+      <area target="" alt="" title="" href="" coords="410,357,526,398" shape="rect">
+      <area target="" alt="" title="" href="" coords="625,309,771,341" shape="rect">
+      <area target="" alt="" title="" href="" coords="625,357,823,398" shape="rect">
+      <area target="" alt="" title="" href="" coords="629,410,808,443" shape="rect">
+      <area target="" alt="" title="" href="" coords="629,459,722,496" shape="rect">
+      <area target="" alt="" title="" href="" coords="853,306,952,346" shape="rect">
+      <area target="" alt="" title="" href="" coords="957,396,851,358" shape="rect">
+      <area target="" alt="" title="" href="" coords="953,448,853,407" shape="rect">
+      <area target="" alt="" title="" href="" coords="1080,308,1213,341" shape="rect">
+      <area target="" alt="" title="" href="" coords="1078,362,1211,394" shape="rect">
+      <area target="" alt="" title="" href="" coords="1078,414,1215,442" shape="rect">
+      <area target="" alt="" title="" href="" coords="1077,461,1174,496" shape="rect">
+  </map>
+  <div id="message">请选择正确的选项。</div>
+</div>
+<script>
+  const imageMap = document.querySelector('map');
+  const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
+  const message = document.querySelector('#message');
+
+  // 监听整个图片区域点击事件
+  imageMap.addEventListener('click', function(event) {
+    event.preventDefault();
+    // 获取热区元素的位置信息
+    const rect = '154,283,271,329'; // 矩形热区的coords属性值
+    const coords = rect.split(',').map(Number);
+
+    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+    if (event.clientX < coords[0] || event.clientX > coords[2] || event.clientY < coords[1]|| event.clientY > coords[3]){
+      showMessage('考试失败！');
+      window.location.href = 'askadmin.html';
+      message.style.display = 'block';
+    }
+  });
+  // 显示提示框并设置定时器自动隐藏
+  function showMessage(text) {
+    message.textContent = text;
+    message.style.display = 'block';
+    setTimeout(function() {
+      message.style.display = 'none';
+    }, 1000); // 3秒后自动隐藏
+  }
+  // 监听热区点击事件
+  terminalArea.addEventListener('click', function(event) {
+    event.preventDefault();
+    // 模拟操作成功，提示用户进行下一步
+    showMessage('选择正确，等待跳转下一个步骤！');
+    window.location.href = 'exampage1-2.html';
+  });
+</script>
+</body>
