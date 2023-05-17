@@ -33,11 +33,6 @@
       height: 44px;
     }
 
-    /*.image-container input {*/
-    /*  position: absolute;*/
-    /*  display: block;*/
-    /*}*/
-
   </style>
 </head>
 <body>
@@ -58,10 +53,14 @@
   </div>
 </div>
 <script>
+
+  //获取热区图片
   const imageMap = document.querySelector('map');
   const terminalArea = imageMap.querySelector('area[alt="扫描并验证"]');
   const message = document.querySelector('#message');
   const myImage = document.querySelector('#my-image');
+
+  //根据屏幕大小调整图片大小 ，此处减了500px
   myImage.style.width = `${window.innerWidth - 500}px`;
 
   //重新设置热区
@@ -69,9 +68,9 @@
   const originalHeight = 1006;
 
   const newWidth = myImage.width;
-  const newHeight = myImage.height;
   const widthRatio = newWidth / originalWidth;
 
+  //重新定位input框的位置根据图片分辨率大小
   const inputElement = document.querySelector('.image-container input');
   const hotAreaCoords = [189, 461, 471, 505];
   inputElement.style.left = `${(hotAreaCoords[0]) * widthRatio}px`;
@@ -80,19 +79,14 @@
   inputElement.style.height = `${(hotAreaCoords[3] - hotAreaCoords[1]) * widthRatio}px`;
 
   //适配屏幕之后的热区坐标
-  const newHotAreaCoords = [189, 461, 471, 505] * widthRatio;
+  const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
-
+//调整每一个热区坐标在调整分辨率之后
   const areas = document.querySelectorAll('#image-map area');
   areas.forEach((area) => {
     const coords = area.getAttribute('coords').split(',');
-    const newCoords = coords.map((coord, index) => {
-      // 每两个坐标为一组
-      if (index % 2 === 0) {
-        return coord * widthRatio;
-      } else {
-        return coord * widthRatio;
-      }
+    const newCoords = coords.map((coord) => {
+      return coord * widthRatio
     });
     area.setAttribute('coords', newCoords.join(','));
     console.log(newCoords)
@@ -105,11 +99,11 @@
     const rect = '603,507,472,461'; // 矩形热区的coords属性值
     const coords = rect.split(',').map(Number);
 
-    console.log(newHotAreaCoords);
+    console.log('===' + newHotAreaCoords);
     console.log(event.clientX);
     console.log(event.clientY);
     // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-    if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1]|| event.clientY > newHotAreaCoords[3]){
+    if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
 
       showMessage('考试失败！');
       window.location.href = 'askadmin.html';
@@ -117,7 +111,7 @@
       const input = document.querySelector('input');
       const value = input.value;
       console.log("123456")
-      console.log("1234567"+ value)
+      console.log("1234567" + value)
     }
   });
   // 显示提示框并设置定时器自动隐藏
@@ -131,6 +125,7 @@
   // 监听热区点击事件
   terminalArea.addEventListener('click', function(event) {
     event.preventDefault();
+    event.stopPropagation();
     // 模拟操作成功，提示用户进行下一步
     const input = document.querySelector('input');
     const value = input.value;
@@ -140,6 +135,8 @@
     if (value == 123) {
       showMessage('您输入的是：' + value + "请点击下一步操作");
       window.location.href = 'exampage1-4.html';
+    }else{
+      window.location.href = 'askadmin.html';
     }
     // showMessage('选择正确，请进行下一步！');
   });
