@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <!-- 其他标签 -->
@@ -28,8 +29,8 @@
 </head>
 <body>
 <div style="position: relative;">
-  <img src="exam1-1.jpg" usemap="#image-map">
-    <map name="image-map">
+  <img id="myImage" src="exam1-1.jpg" usemap="#image-map" >
+    <map id="image-map" name="image-map">
       <area target="_blank" alt="终端入库" title="终端入库" href="" coords="154,283,271,329" shape="rect">
       <area target="" alt="" title="" href="" coords="155,336,271,377" shape="rect">
       <area target="" alt="" title="" href="" coords="155,383,344,428" shape="rect">
@@ -52,38 +53,69 @@
   <div id="message">请选择正确的选项。</div>
 </div>
 <script>
-  const imageMap = document.querySelector('map');
-  const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
-  const message = document.querySelector('#message');
+  window.onload = function() {
+    const imageMap = document.querySelector('map');
+    const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
+    // const message = document.querySelector('#message');
+    const myImage = document.querySelector('#myImage');
 
-  // 监听整个图片区域点击事件
-  imageMap.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 获取热区元素的位置信息
-    const rect = '154,283,271,329'; // 矩形热区的coords属性值
-    const coords = rect.split(',').map(Number);
 
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-    if (event.clientX < coords[0] || event.clientX > coords[2] || event.clientY < coords[1]|| event.clientY > coords[3]){
-      showMessage('考试失败！');
-      window.location.href = 'askadmin.html';
+    //1.拿到原始图片的尺寸
+    const img = document.getElementById('myImage');
+    const originalWidth = img.width;
+
+
+    //2.根据屏幕大小调整图片大小 ，此处减了500px
+    myImage.style.width = `${window.innerWidth - 100}px`;
+    const newWidth = myImage.width;
+    const widthRatio = newWidth / originalWidth;
+
+    //3.适配屏幕之后的热区坐标
+    const hotAreaCoords = [154,283,271,329];
+    const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
+
+//4.调整每一个热区坐标在调整分辨率之后
+    const areas = document.querySelectorAll('#image-map area');
+    areas.forEach((area) => {
+      const coords = area.getAttribute('coords').split(',');
+      const newCoords = coords.map((coord) => {
+        return coord * widthRatio
+      });
+      area.setAttribute('coords', newCoords.join(','));
+      console.log(newCoords)
+    });
+
+
+    // 监听整个图片区域点击事件
+    imageMap.addEventListener('click', function (event) {
+      event.preventDefault();
+
+      // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+
+        showMessage('考试失败！');
+        window.location.href = 'askadmin.html';
+        message.style.display = 'block';
+      }
+    });
+
+    // 显示提示框并设置定时器自动隐藏
+    function showMessage(text) {
+      message.textContent = text;
       message.style.display = 'block';
+      setTimeout(function () {
+        message.style.display = 'none';
+      }, 1000); // 3秒后自动隐藏
     }
-  });
-  // 显示提示框并设置定时器自动隐藏
-  function showMessage(text) {
-    message.textContent = text;
-    message.style.display = 'block';
-    setTimeout(function() {
-      message.style.display = 'none';
-    }, 1000); // 3秒后自动隐藏
+
+    // 监听热区点击事件
+    terminalArea.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      // 模拟操作成功，提示用户进行下一步
+      showMessage('选择正确，等待跳转下一个步骤！');
+      window.location.href = 'exampage1-2.html';
+    });
   }
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 模拟操作成功，提示用户进行下一步
-    showMessage('选择正确，等待跳转下一个步骤！');
-    window.location.href = 'exampage1-2.html';
-  });
 </script>
 </body>

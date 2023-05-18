@@ -4,46 +4,56 @@
     <meta charset="UTF-8">
     <title>第一阶段考试</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
+            background: linear-gradient(to bottom, #4b6cb7, #182848);
+            color: #333;
+        }
+        #certificate {
+            width: 70%;
+            margin: 50px auto;
+            padding: 30px 20px;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+            background-size: cover;
+            background-color: #fff;
+            background-image: url('https://example.com/flower-border.png'); /* 替换为你想要的花边图片的 URL */
+            background-repeat: repeat;
         }
         h1 {
-            color: #337ab7;
+            font-size: 2.5em;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
         p {
-            font-size: 18px;
-            line-height: 1.5;
-            margin: 20px 0;
+            font-size: 1.2em;
+            margin-bottom: 10px;
         }
-        button {
-            background-color: #337ab7;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        span {
+            font-weight: 600;
+            color: #2c3e50;
         }
-        button:hover {
-            background-color: #23527c;
+        #signature {
+            margin-top: 50px;
+            font-size: 2em;
+            text-align: right;
+        }
+        #big{
+            font-size: 30px;
         }
     </style>
 </head>
 <body>
-<h1>恭喜你通过第一阶段考试！</h1>
-<p>你已经完成了第一阶段的考试。</p>
-<p>请点击下面的按钮，进入下一场考试。</p>
-<button onclick="location.href='next_exam.html'">进入下一场考试</button>
-
 <div id="certificate" style="display: none;">
-    <h1>结业证书</h1>
-    <p>这证明</p>
-    <p>姓名： <span id="name"></span></p>
-    <p>考号： <span id="id"></span></p>
-    <p>已经成功通过了本培训课程。</p>
-    <p>感谢您的参与。</p>
-    <button onclick="printCertificate()">打印证书</button>
+    <h1>结业证书🏆</h1>
+    <p>姓名：     <span id="name"></span></p>
+    <p>网大账号：  <span id="id"></span></p>
+    <p id="big">已成功通过本次考试。</p>
+    <p>防伪戳(用于生成考试通过唯一码):  <span id="fangwei"></span></p>
+    <p id="signature">请将本页面截图发送至群内。</p>
 </div>
 
 <script>
@@ -56,14 +66,10 @@
         // 在页面上显示姓名和考号的值
         document.getElementById('name').textContent = name;
         document.getElementById('id').textContent = id;
+        document.getElementById('fangwei').textContent = new Date().getTime();
 
         // 显示结业证书
         document.getElementById('certificate').style.display = 'block';
-    }
-
-    // 打印证书
-    function printCertificate() {
-        window.print();
     }
 </script>
 </body>
