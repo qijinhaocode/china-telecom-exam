@@ -79,7 +79,7 @@
   inputElement.style.width = `${(hotAreaCoords[2] - hotAreaCoords[0]) * widthRatio}px`;
   inputElement.style.height = `${(hotAreaCoords[3] - hotAreaCoords[1]) * widthRatio}px`;
 
-//4.调整每一个热区坐标在调整分辨率之后
+  //4.调整每一个热区坐标在调整分辨率之后
   const areas = document.querySelectorAll('#image-map area');
   areas.forEach((area) => {
     const coords = area.getAttribute('coords').split(',');
@@ -115,7 +115,7 @@
   // 监听热区点击事件
   terminalArea.addEventListener('click', function(event) {
     event.preventDefault();
-    // event.stopPropagation();
+    event.stopPropagation();
     // 模拟操作成功，提示用户进行下一步
     const input = document.querySelector('input');
     const value = input.value;

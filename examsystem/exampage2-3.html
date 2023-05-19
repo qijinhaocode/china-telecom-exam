@@ -1,108 +1,132 @@
+<!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <!-- 其他标签 -->
-  <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
+    <meta charset="UTF-8">
+    <!-- 其他标签 -->
+    <style>
+        #message {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            z-index: 1;
+            background-color: #e80a0a;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #888;
+        }
 
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
-    .image-container input {
-        position: absolute;
-        display: block;
-        top: 461px; /* 调整为热区的上边界位置 */
-        left: 189px; /* 调整为热区的左边界位置 */
-        width: 282px;
-        height: 44px;
-    }
-  </style>
+        #message:before {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: #fff transparent transparent transparent;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
+        .image-container input {
+            position: absolute;
+            display: block;
+            top: 461px; /* 调整为热区的上边界位置 */
+            left: 189px; /* 调整为热区的左边界位置 */
+            width: 282px;
+            height: 44px;
+        }
+
+    </style>
 </head>
 <body>
 <div style="position: relative;">
-    <img id="my-image" src="exam2-5.png" usemap="#image-map">
+    <img id="my-image" src="exam2-3.png" usemap="#image-map">
 
     <map id="image-map" name="image-map">
-        <area target="" alt="采购单价输入框" title="采购单价输入框" href="" coords="1238,585,1376,619" shape="rect">
-        <area target="" alt="串号详情" title="串号详情" href="" coords="1569,583,1671,616" shape="rect">
-        <area target="" alt="删除" title="删除" href="" coords="1733,587,1817,616" shape="rect">
-        <area target="" alt="取消" title="取消" href="" coords="811,958,936,997" shape="rect">
-        <area target="" alt="提交" title="提交" href="" coords="955,958,1080,997" shape="rect">
+        <area target="" alt="商品串码输入框" title="商品串码输入框" href="" coords="197,441,648,497" shape="rect">
+        <area target="" alt="扫描并验证" title="扫描并验证" href="" coords="646,440,782,493" shape="rect">
+        <area target="" alt="TXT批量导入查询" title="TXT批量导入查询" href="" coords="814,438,1002,497" shape="rect">
+        <area target="" alt="TXT模板下载" title="TXT模板下载" href="" coords="1023,438,1209,494" shape="rect">
+        <area target="" alt="关闭" title="关闭" href="" coords="828,629,955,677" shape="rect">
+        <area target="" alt="确定" title="确定" href="" coords="975,634,1099,677" shape="rect">
     </map>
-  <div id="message">请选择正确的选项。</div>
+    <div id="message">请选择正确的选项。</div>
+    <div class="image-container">
+        <input type="text" placeholder="Enter text here">
+    </div>
 </div>
 <script>
-    window.onload = function() {
-        const imageMap = document.querySelector('map');
-        const terminalArea = imageMap.querySelector('area[alt="确定"]');
-        const message = document.querySelector('#message');
 
-        const img = document.getElementById('my-image');
-        const originalWidth = img.width;
+    //获取热区图片
+    const imageMap = document.querySelector('map');
+    const terminalArea = imageMap.querySelector('area[alt="扫描并验证"]');
+    const myImage = document.querySelector('#my-image');
 
-        //1.根据屏幕大小调整图片大小 ，此处减了100px
-        img.style.width = `${window.innerWidth - 100}px`;
-        const newWidth = img.width;
+    //1.根据屏幕大小调整图片大小 ，此处减了500px
+    myImage.style.width = `${window.innerWidth - 100}px`;
 
-        //2.重新设置热区
+    //2.重新设置热区
+    const originalWidth = 1920;
+    const originalHeight = 1004;
 
-        const widthRatio = newWidth / originalWidth;
+    const newWidth = myImage.width;
+    const widthRatio = newWidth / originalWidth;
 
 
-  //4.调整每一个热区坐标在调整分辨率之后
-  const areas = document.querySelectorAll('#image-map area');
-  areas.forEach((area) => {
-      const coords = area.getAttribute('coords').split(',');
-      const newCoords = coords.map((coord) => {
-          return coord * widthRatio
-      });
-      area.setAttribute('coords', newCoords.join(','));
-  });
+    //3.重新定位input框的位置根据图片分辨率大小
+    const inputElement = document.querySelector('.image-container input');
+    const hotAreaCoords = [197,441,648,497];
+    inputElement.style.left = `${(hotAreaCoords[0]) * widthRatio}px`;
+    inputElement.style.top = `${(hotAreaCoords[1]) * widthRatio}px`;
+    inputElement.style.width = `${(hotAreaCoords[2] - hotAreaCoords[0]) * widthRatio}px`;
+    inputElement.style.height = `${(hotAreaCoords[3] - hotAreaCoords[1]) * widthRatio}px`;
 
-  // 监听整个图片区域点击事件
-  imageMap.addEventListener('click', function(event) {
-    event.preventDefault();
-      // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-      const scanHotArea = [965,698,1091,739];
-      const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-      showMessage('考试失败！');
-      window.location.href = 'askadmin.html';
-      message.style.display = 'block';
-    }
-  });
-  // 显示提示框并设置定时器自动隐藏
-  function showMessage(text) {
-    message.textContent = text;
-    message.style.display = 'block';
-    setTimeout(function() {
-      message.style.display = 'none';
-    }, 1000); // 3秒后自动隐藏
-  }
-        // 监听热区点击事件
-        terminalArea.addEventListener('click', function (event) {
-            event.preventDefault();
-            // event.stopPropagation();
-            window.location.href = 'exampage2-5.html';
-            // showMessage('选择正确，请进行下一步！');
+    //4.调整每一个热区坐标在调整分辨率之后
+    const areas = document.querySelectorAll('#image-map area');
+    areas.forEach((area) => {
+        const coords = area.getAttribute('coords').split(',');
+        const newCoords = coords.map((coord) => {
+            return coord * widthRatio
         });
+        area.setAttribute('coords', newCoords.join(','));
+    });
+
+    // 监听整个图片区域点击事件
+    imageMap.addEventListener('click', function(event) {
+        event.preventDefault();
+        // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
+        const scanHotArea = [603,507,472,461];
+        const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
+
+        // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+        if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+
+            showMessage('考试失败！');
+            window.location.href = 'askadmin.html';
+            message.style.display = 'block';
+        }
+    });
+    // 显示提示框并设置定时器自动隐藏
+    function showMessage(text) {
+        message.textContent = text;
+        message.style.display = 'block';
+        setTimeout(function() {
+            message.style.display = 'none';
+        }, 1000); // 3秒后自动隐藏
     }
+    // 监听热区点击事件
+    terminalArea.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // 模拟操作成功，提示用户进行下一步
+        const input = document.querySelector('input');
+        const value = input.value;
+
+
+        if (value == 123) {
+            showMessage('您输入的是：' + value + "请点击下一步操作");
+            window.location.href = 'exampage2-4.html';
+        }else{
+            window.location.href = 'askadmin.html';
+        }
+    });
 </script>
 </body>

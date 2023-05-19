@@ -1,0 +1,75 @@
+<head>
+  <meta charset="UTF-8">
+  <!-- 其他标签 -->
+  <style>
+    #message {
+      display: none;
+      position: absolute;
+      top: 150px;
+      left: 100px;
+      z-index: 1;
+      background-color: #e80a0a;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px #888;
+    }
+
+    #message:before {
+      content: "";
+      position: absolute;
+      border-style: solid;
+      border-width: 10px 10px 0 10px;
+      border-color: #fff transparent transparent transparent;
+      top: -10px;
+      left: 50%;
+      margin-left: -10px;
+    }
+  </style>
+</head>
+<body>
+<div style="position: relative;">
+    <img id="myImage" src="exam2-6.png" usemap="#image-map">
+
+    <map  id="image-map"  name="image-map">
+        <area target="" alt="关闭" title="关闭" href="" coords="902,835,999,876" shape="rect">
+        <area target="" alt="叉" title="叉" href="" coords="1269,382,1311,425" shape="rect">
+    </map>
+  <div id="message">请选择正确的选项。</div>
+</div>
+<script>
+  const imageMap = document.querySelector('map');
+  const terminalArea = imageMap.querySelector('area[alt="关闭"]');
+  const message = document.querySelector('#message');
+  const myImage = document.querySelector('#myImage');
+
+  // 监听整个图片区域点击事件
+  imageMap.addEventListener('click', function(event) {
+    event.preventDefault();
+    // 获取热区元素的位置信息
+      const hotAreaCoords = [902,835,999,876];
+      const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
+
+    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+      showMessage('考试失败！');
+      window.location.href = 'askadmin.html';
+      message.style.display = 'block';
+    }
+  });
+  // 显示提示框并设置定时器自动隐藏
+  function showMessage(text) {
+    message.textContent = text;
+    message.style.display = 'block';
+    setTimeout(function() {
+      message.style.display = 'none';
+    }, 1000); // 3秒后自动隐藏
+  }
+  // 监听热区点击事件
+  terminalArea.addEventListener('click', function(event) {
+    event.preventDefault();
+    // 模拟操作成功，提示用户进行下一步
+    showMessage('选择正确，等待跳转下一个步骤！');
+    window.location.href = 'stage-1-congratulations.html';
+  });
+</script>
+</body>
