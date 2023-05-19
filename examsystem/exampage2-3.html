@@ -24,36 +24,65 @@
       left: 50%;
       margin-left: -10px;
     }
+    .image-container input {
+        position: absolute;
+        display: block;
+        top: 461px; /* 调整为热区的上边界位置 */
+        left: 189px; /* 调整为热区的左边界位置 */
+        width: 282px;
+        height: 44px;
+    }
   </style>
 </head>
 <body>
 <div style="position: relative;">
-  <img src="exam2-3.png" usemap="#image-map">
+    <img id="my-image" src="exam2-5.png" usemap="#image-map">
 
-  <map name="image-map">
-      <area target="" alt="扫描并验证" title="扫描并验证" href="" coords="881,436,1073,491" shape="rect">
-      <area target="" alt="TXT批量导入" title="TXT批量导入" href="" coords="1084,434,1268,495" shape="rect">
-      <area target="" alt="TXT模版下载" title="TXT模版下载" href="" coords="1287,436,1480,493" shape="rect">
-      <area target="" alt="关闭" title="关闭" href="" coords="868,702,1024,763" shape="rect">
-      <area target="" alt="确定" title="确定" href="" coords="1039,704,1233,760" shape="rect">
-      <area target="" alt="商品串码" title="商品串码" href="" coords="877,494,182,440" shape="rect">
-  </map>
+    <map id="image-map" name="image-map">
+        <area target="" alt="采购单价输入框" title="采购单价输入框" href="" coords="1238,585,1376,619" shape="rect">
+        <area target="" alt="串号详情" title="串号详情" href="" coords="1569,583,1671,616" shape="rect">
+        <area target="" alt="删除" title="删除" href="" coords="1733,587,1817,616" shape="rect">
+        <area target="" alt="取消" title="取消" href="" coords="811,958,936,997" shape="rect">
+        <area target="" alt="提交" title="提交" href="" coords="955,958,1080,997" shape="rect">
+    </map>
   <div id="message">请选择正确的选项。</div>
 </div>
 <script>
-  const imageMap = document.querySelector('map');
-  const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
-  const message = document.querySelector('#message');
+    window.onload = function() {
+        const imageMap = document.querySelector('map');
+        const terminalArea = imageMap.querySelector('area[alt="确定"]');
+        const message = document.querySelector('#message');
+
+        const img = document.getElementById('my-image');
+        const originalWidth = img.width;
+
+        //1.根据屏幕大小调整图片大小 ，此处减了100px
+        img.style.width = `${window.innerWidth - 100}px`;
+        const newWidth = img.width;
+
+        //2.重新设置热区
+
+        const widthRatio = newWidth / originalWidth;
+
+
+  //4.调整每一个热区坐标在调整分辨率之后
+  const areas = document.querySelectorAll('#image-map area');
+  areas.forEach((area) => {
+      const coords = area.getAttribute('coords').split(',');
+      const newCoords = coords.map((coord) => {
+          return coord * widthRatio
+      });
+      area.setAttribute('coords', newCoords.join(','));
+  });
 
   // 监听整个图片区域点击事件
   imageMap.addEventListener('click', function(event) {
     event.preventDefault();
-    // 获取热区元素的位置信息
-    const rect = '154,283,271,329'; // 矩形热区的coords属性值
-    const coords = rect.split(',').map(Number);
-
+      // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
+      const scanHotArea = [965,698,1091,739];
+      const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
     // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-    if (event.clientX < coords[0] || event.clientX > coords[2] || event.clientY < coords[1]|| event.clientY > coords[3]){
+      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
       showMessage('考试失败！');
       window.location.href = 'askadmin.html';
       message.style.display = 'block';
@@ -67,12 +96,13 @@
       message.style.display = 'none';
     }, 1000); // 3秒后自动隐藏
   }
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 模拟操作成功，提示用户进行下一步
-    showMessage('选择正确，等待跳转下一个步骤！');
-    window.location.href = 'exampage1-2.html';
-  });
+        // 监听热区点击事件
+        terminalArea.addEventListener('click', function (event) {
+            event.preventDefault();
+            // event.stopPropagation();
+            window.location.href = 'exampage2-5.html';
+            // showMessage('选择正确，请进行下一步！');
+        });
+    }
 </script>
 </body>
