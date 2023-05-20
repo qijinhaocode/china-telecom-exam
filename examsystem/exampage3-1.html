@@ -1,90 +1,115 @@
+<!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <!-- 其他标签 -->
-  <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
+    <meta charset="UTF-8">
+    <!-- 其他标签 -->
+    <style>
+        #message {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            z-index: 1;
+            background-color: #e80a0a;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #888;
+        }
 
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
-  </style>
+        #message:before {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: #fff transparent transparent transparent;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
+    </style>
 </head>
 <body>
 <div style="position: relative;">
-  <img src="exam3-1.png" usemap="#image-map">
+    <img id="myImage" src="exam3-1.png" usemap="#image-map">
 
-  <map name="image-map">
-      <area target="" alt="" title="" href="" coords="187,302,285,345" shape="rect">
-      <area target="" alt="" title="" href="" coords="187,358,284,399" shape="rect">
-      <area target="" alt="" title="" href="" coords="183,410,373,452" shape="rect">
-      <area target="" alt="" title="" href="" coords="183,463,325,498" shape="rect">
-      <area target="" alt="连锁终端退库" title="连锁终端退库" href="" coords="183,515,327,556" shape="rect">
-      <area target="" alt="" title="" href="" coords="410,310,511,345" shape="rect">
-      <area target="" alt="" title="" href="" coords="410,357,526,398" shape="rect">
-      <area target="" alt="" title="" href="" coords="625,309,771,341" shape="rect">
-      <area target="" alt="" title="" href="" coords="625,357,823,398" shape="rect">
-      <area target="" alt="" title="" href="" coords="629,410,808,443" shape="rect">
-      <area target="" alt="" title="" href="" coords="629,459,722,496" shape="rect">
-      <area target="" alt="" title="" href="" coords="853,306,952,346" shape="rect">
-      <area target="" alt="" title="" href="" coords="957,396,851,358" shape="rect">
-      <area target="" alt="" title="" href="" coords="953,448,853,407" shape="rect">
-      <area target="" alt="" title="" href="" coords="1080,308,1213,341" shape="rect">
-      <area target="" alt="" title="" href="" coords="1078,362,1211,394" shape="rect">
-      <area target="" alt="" title="" href="" coords="1078,414,1215,442" shape="rect">
-      <area target="" alt="" title="" href="" coords="1077,461,1174,496" shape="rect">
-  </map>
-  <div id="message">请选择正确的选项。</div>
+    <map id="image-map" name="image-map">
+        <area target="" alt="裸机销售" title="裸机销售" href="" coords="166,349,260,393" shape="rect">
+        <area target="" alt="合约机销售" title="合约机销售" href="" coords="166,411,275,457" shape="rect">
+        <area target="" alt="串码查询" title="串码查询" href="" coords="370,348,466,393" shape="rect">
+        <area target="" alt="入库单据" title="入库单据" href="" coords="371,410,458,455" shape="rect">
+        <area target="" alt="销售单据" title="销售单据" href="" coords="370,468,468,514" shape="rect">
+        <area target="" alt="销售串码明细" title="销售串码明细" href="" coords="568,346,709,395" shape="rect">
+        <area target="" alt="销售收银表" title="销售收银表" href="" coords="567,405,700,451" shape="rect">
+        <area target="" alt="实时库存" title="实时库存" href="" coords="567,465,682,510" shape="rect">
+        <area target="" alt="选购商品" title="选购商品" href="" coords="1737,613,1862,662" shape="rect">
+        <area target="" alt="提交订单" title="提交订单" href="" coords="816,841,955,895" shape="rect">
+        <area target="" alt="取消" title="取消" href="" coords="970,840,1106,893" shape="rect">
+    </map>
+    <div id="message">请选择正确的选项。</div>
 </div>
 <script>
-  const imageMap = document.querySelector('map');
-  const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
-  const message = document.querySelector('#message');
+    window.onload = function() {
+        const imageMap = document.querySelector('map');
+        const terminalArea = imageMap.querySelector('area[alt="裸机销售"]');
+        // const message = document.querySelector('#message');
+        const myImage = document.querySelector('#myImage');
 
-  // 监听整个图片区域点击事件
-  imageMap.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 获取热区元素的位置信息
-    const rect = '154,283,271,329'; // 矩形热区的coords属性值
-    const coords = rect.split(',').map(Number);
 
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-    if (event.clientX < coords[0] || event.clientX > coords[2] || event.clientY < coords[1]|| event.clientY > coords[3]){
-      showMessage('考试失败！');
-      window.location.href = 'askadmin.html';
-      message.style.display = 'block';
+        //1.拿到原始图片的尺寸
+        const img = document.getElementById('myImage');
+        const originalWidth = img.width;
+
+
+        //2.根据屏幕大小调整图片大小 ，此处减了500px
+        myImage.style.width = `${window.innerWidth - 100}px`;
+        const newWidth = myImage.width;
+        const widthRatio = newWidth / originalWidth;
+
+        //3.适配屏幕之后的热区坐标
+        const hotAreaCoords = [166,349,260,393];
+        const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
+
+//4.调整每一个热区坐标在调整分辨率之后
+        const areas = document.querySelectorAll('#image-map area');
+        areas.forEach((area) => {
+            const coords = area.getAttribute('coords').split(',');
+            const newCoords = coords.map((coord) => {
+                return coord * widthRatio
+            });
+            area.setAttribute('coords', newCoords.join(','));
+            console.log(newCoords)
+        });
+
+
+        // 监听整个图片区域点击事件
+        imageMap.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+            if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+
+                showMessage('考试失败！');
+                window.location.href = 'askadmin.html';
+                message.style.display = 'block';
+            }
+        });
+
+        // 显示提示框并设置定时器自动隐藏
+        function showMessage(text) {
+            message.textContent = text;
+            message.style.display = 'block';
+            setTimeout(function () {
+                message.style.display = 'none';
+            }, 1000); // 3秒后自动隐藏
+        }
+
+        // 监听热区点击事件
+        terminalArea.addEventListener('click', function (event) {
+            event.preventDefault();
+            // event.stopPropagation();
+            // 模拟操作成功，提示用户进行下一步
+            showMessage('选择正确，等待跳转下一个步骤！');
+            window.location.href = 'exampage3-2.html';
+        });
     }
-  });
-  // 显示提示框并设置定时器自动隐藏
-  function showMessage(text) {
-    message.textContent = text;
-    message.style.display = 'block';
-    setTimeout(function() {
-      message.style.display = 'none';
-    }, 1000); // 3秒后自动隐藏
-  }
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 模拟操作成功，提示用户进行下一步
-    showMessage('选择正确，等待跳转下一个步骤！');
-    window.location.href = 'exampage1-2.html';
-  });
 </script>
 </body>
