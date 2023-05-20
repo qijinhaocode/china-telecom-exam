@@ -83,9 +83,7 @@
             console.log(warehouseName)
             if (putInWarehousePrice!= 5999 || warehouseName != "广场天翼手机卖场-元丰第一仓库"){
                  warehouseName === "请选择" ? "未选择" : warehouseName;
-                // var examResult = "考试失败： " + "（1）终端入库-采购单价：" + putInWarehousePrice + "&nbsp;&nbsp;&nbsp;&nbsp;（2）入库仓库 ：  " + warehouseName;
-                document.getElementById('comment').textContent = "恭喜通过考试✅";
-
+                var examResult = "考试失败： " + "（1）终端入库-采购单价：" + putInWarehousePrice + "&nbsp;&nbsp;&nbsp;&nbsp;（2）入库仓库 ：  " + warehouseName;
 
                 document.getElementById('comment').innerHTML = examResult;
             }
