@@ -83,7 +83,6 @@
   window.onload = function() {
   const imageMap = document.querySelector('map');
   const terminalArea = imageMap.querySelector('area[alt="增加一行"]');
-  const message = document.querySelector('#message');
 
 
   const myImage = document.querySelector('#myImage');
@@ -179,7 +178,6 @@
     // 判断点击位置是否在热区范围内，如果不是则提示考试失败
     if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
       window.location.href = 'newpage.html';
-      message.style.display = 'block';
     }
   });
 

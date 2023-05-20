@@ -3,29 +3,6 @@
   <meta charset="UTF-8">
   <!-- 其他标签 -->
   <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
-
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
-
     .image-container input {
       position: absolute;
       display: block;
@@ -112,7 +89,6 @@
 <script>
   const imageMap = document.querySelector('map');
   const terminalArea = imageMap.querySelector('area[alt="提交"]');
-  const message = document.querySelector('#message');
   const myImage = document.querySelector('#my-image');
 
   //1.根据屏幕大小调整图片大小 ，此处减了500px
@@ -206,30 +182,12 @@
 
     // 判断点击位置是否在热区范围内，如果不是则提示考试失败
     if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-      var x = event.clientX;
-      var y = event.clientY;
-
-      // 记录点击位置到日志
-      console.log('ee点击坐标：X=' + x + ', Y=' + y);
-      console.log('ee', coords);
-      showMessage('考试失败！');
       window.location.href = 'askadmin.html';
-      message.style.display = 'block';
     }
   });
-  // 显示提示框并设置定时器自动隐藏
-  function showMessage(text) {
-    message.textContent = text;
-    message.style.display = 'block';
-    setTimeout(function() {
-      message.style.display = 'none';
-    }, 1000); // 3秒后自动隐藏
-  }
+
   // 监听热区点击事件
   terminalArea.addEventListener('click', function(event) {
-    const x = event.offsetX;
-    const y = event.offsetY;
-
     // 记录点击位置到日志
     event.preventDefault();
     const input = document.querySelector('input');

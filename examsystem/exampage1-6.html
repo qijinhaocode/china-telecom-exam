@@ -3,28 +3,6 @@
     <meta charset="UTF-8">
     <!-- 其他标签 -->
     <style>
-        #message {
-            display: none;
-            position: absolute;
-            top: 150px;
-            left: 100px;
-            z-index: 1;
-            background-color: #e80a0a;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 5px #888;
-        }
-
-        #message:before {
-            content: "";
-            position: absolute;
-            border-style: solid;
-            border-width: 10px 10px 0 10px;
-            border-color: #fff transparent transparent transparent;
-            top: -10px;
-            left: 50%;
-            margin-left: -10px;
-        }
     </style>
 </head>
 <body>
@@ -32,7 +10,7 @@
     <img id="myImage"  src="exam1-6.png" usemap="#image-map">
 
     <map id="image-map" name="image-map">
-        <area target="" alt="关闭" title="关闭" href="" coords="920,848,1017,890" shape="rect">
+        <area target="" alt="关闭" title="关闭" href="" coords="909,837,1033,906" shape="rect">
     </map>
     <div class="image-container">
     </div>
@@ -41,7 +19,6 @@
     window.onload = function() {
         const imageMap = document.querySelector('map');
     const terminalArea = imageMap.querySelector('area[alt="关闭"]');
-    const message = document.querySelector('#message');
     const myImage = document.querySelector('#myImage');
 
 
@@ -56,7 +33,7 @@
     const widthRatio = newWidth / originalWidth;
 
     //3.适配屏幕之后的热区坐标
-    const hotAreaCoords = [920,848,1017,890];
+    const hotAreaCoords = [909,837,1033,906];
     const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
     //4.调整每一个热区坐标在调整分辨率之后
@@ -75,29 +52,19 @@
     imageMap.addEventListener('click', function (event) {
         event.preventDefault();
         // 获取热区元素的位置信息
-        const rect = '920,848,1017,890'; // 矩形热区的coords属性值
+        const rect = '909,837,1033,906'; // 矩形热区的coords属性值
         const coords = rect.split(',').map(Number);
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
         if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-            showMessage('考试失败！');
             window.location.href = 'askadmin.html';
-            message.style.display = 'block';
         }
     });
-
-    // 显示提示框并设置定时器自动隐藏
-    function showMessage(text) {
-        message.textContent = text;
-        message.style.display = 'block';
-        setTimeout(function () {
-            message.style.display = 'none';
-        }, 1000); // 3秒后自动隐藏
-    }
 
     // 监听热区点击事件
     terminalArea.addEventListener('click', function (event) {
         event.preventDefault();
+        event.stopPropagation();
         window.location.href = 'stage-1-congratulations.html';
     });}
 </script>
