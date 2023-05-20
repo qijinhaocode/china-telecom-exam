@@ -1,121 +1,87 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <!-- 其他标签 -->
-  <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
-
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <style>
+    </style>
 </head>
 <body>
 <div style="position: relative;">
-    <img id="myImage" src="exam1-1.jpg" usemap="#image-map" >
+    <img id="myImage" src="exam1-1.jpg" usemap="#image-map">
     <map id="image-map" name="image-map">
-      <area target="" alt="终端入库" title="终端入库" href="" coords="154,283,271,329" shape="rect">
-      <area target="" alt="" title="" href="" coords="155,336,271,377" shape="rect">
-      <area target="" alt="" title="" href="" coords="155,383,344,428" shape="rect">
-      <area target="" alt="" title="" href="" coords="369,283,464,329" shape="rect">
-      <area target="" alt="" title="" href="" coords="368,334,473,378" shape="rect">
-      <area target="" alt="" title="" href="" coords="157,436,312,472" shape="rect">
-      <area target="" alt="" title="" href="" coords="159,480,306,523" shape="rect">
-      <area target="" alt="" title="" href="" coords="565,285,706,328" shape="rect">
-      <area target="" alt="" title="" href="" coords="561,336,756,381" shape="rect">
-      <area target="" alt="" title="" href="" coords="563,387,745,426" shape="rect">
-      <area target="" alt="" title="" href="" coords="565,431,700,475" shape="rect">
-      <area target="" alt="" title="" href="" coords="772,285,877,326" shape="rect">
-      <area target="" alt="" title="" href="" coords="773,338,880,372" shape="rect">
-      <area target="" alt="" title="" href="" coords="773,382,887,419" shape="rect">
-      <area target="" alt="" title="" href="" coords="977,283,1123,327" shape="rect">
-      <area target="" alt="" title="" href="" coords="977,336,1123,372" shape="rect">
-      <area target="" alt="" title="" href="" coords="977,380,1127,426" shape="rect">
-      <area target="" alt="" title="" href="" coords="973,432,1123,476" shape="rect">
-  </map>
-  <div id="message">请选择正确的选项。</div>
+        <area target="" alt="终端入库" title="终端入库" href="" coords="154,283,271,329" shape="rect">
+        <area target="" alt="" title="" href="" coords="155,336,271,377" shape="rect">
+        <area target="" alt="" title="" href="" coords="155,383,344,428" shape="rect">
+        <area target="" alt="" title="" href="" coords="369,283,464,329" shape="rect">
+        <area target="" alt="" title="" href="" coords="368,334,473,378" shape="rect">
+        <area target="" alt="" title="" href="" coords="157,436,312,472" shape="rect">
+        <area target="" alt="" title="" href="" coords="159,480,306,523" shape="rect">
+        <area target="" alt="" title="" href="" coords="565,285,706,328" shape="rect">
+        <area target="" alt="" title="" href="" coords="561,336,756,381" shape="rect">
+        <area target="" alt="" title="" href="" coords="563,387,745,426" shape="rect">
+        <area target="" alt="" title="" href="" coords="565,431,700,475" shape="rect">
+        <area target="" alt="" title="" href="" coords="772,285,877,326" shape="rect">
+        <area target="" alt="" title="" href="" coords="773,338,880,372" shape="rect">
+        <area target="" alt="" title="" href="" coords="773,382,887,419" shape="rect">
+        <area target="" alt="" title="" href="" coords="977,283,1123,327" shape="rect">
+        <area target="" alt="" title="" href="" coords="977,336,1123,372" shape="rect">
+        <area target="" alt="" title="" href="" coords="977,380,1127,426" shape="rect">
+        <area target="" alt="" title="" href="" coords="973,432,1123,476" shape="rect">
+    </map>
 </div>
 <script>
-  window.onload = function() {
-    const imageMap = document.querySelector('map');
-    const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
-    // const message = document.querySelector('#message');
-    const myImage = document.querySelector('#myImage');
+    window.onload = function () {
+        const imageMap = document.querySelector('map');
+        const terminalArea = imageMap.querySelector('area[alt="终端入库"]');
+        // const message = document.querySelector('#message');
+        const myImage = document.querySelector('#myImage');
 
 
-    //1.拿到原始图片的尺寸
-    const img = document.getElementById('myImage');
-    const originalWidth = img.width;
+        //1.拿到原始图片的尺寸
+        const img = document.getElementById('myImage');
+        const originalWidth = img.width;
 
 
-    //2.根据屏幕大小调整图片大小 ，此处减了500px
-    myImage.style.width = `${window.innerWidth - 100}px`;
-    const newWidth = myImage.width;
-    const widthRatio = newWidth / originalWidth;
+        //2.根据屏幕大小调整图片大小 ，此处减了500px
+        myImage.style.width = `${window.innerWidth - 100}px`;
+        const newWidth = myImage.width;
+        const widthRatio = newWidth / originalWidth;
 
-    //3.适配屏幕之后的热区坐标
-    const hotAreaCoords = [154,283,271,329];
-    const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
+        //3.适配屏幕之后的热区坐标
+        const hotAreaCoords = [154, 283, 271, 329];
+        const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
-//4.调整每一个热区坐标在调整分辨率之后
-    const areas = document.querySelectorAll('#image-map area');
-    areas.forEach((area) => {
-      const coords = area.getAttribute('coords').split(',');
-      const newCoords = coords.map((coord) => {
-        return coord * widthRatio
-      });
-      area.setAttribute('coords', newCoords.join(','));
-      console.log(newCoords)
-    });
+        //4.调整每一个热区坐标在调整分辨率之后
+        const areas = document.querySelectorAll('#image-map area');
+        areas.forEach((area) => {
+            const coords = area.getAttribute('coords').split(',');
+            const newCoords = coords.map((coord) => {
+                return coord * widthRatio
+            });
+            area.setAttribute('coords', newCoords.join(','));
+            console.log(newCoords)
+        });
 
 
-    // 监听整个图片区域点击事件
-    imageMap.addEventListener('click', function (event) {
-      event.preventDefault();
+        // 监听整个图片区域点击事件
+        imageMap.addEventListener('click', function (event) {
+            event.preventDefault();
 
-      // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+            // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+            if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
 
-        showMessage('考试失败！');
-        window.location.href = 'askadmin.html';
-        message.style.display = 'block';
-      }
-    });
+                showMessage('考试失败！');
+                window.location.href = 'askadmin.html';
+                message.style.display = 'block';
+            }
+        });
 
-    // 显示提示框并设置定时器自动隐藏
-    function showMessage(text) {
-      message.textContent = text;
-      message.style.display = 'block';
-      setTimeout(function () {
-        message.style.display = 'none';
-      }, 1000); // 3秒后自动隐藏
+        // 监听热区点击事件
+        terminalArea.addEventListener('click', function (event) {
+            event.preventDefault();
+            // event.stopPropagation();
+            // 模拟操作成功，提示用户进行下一步
+            window.location.href = 'exampage1-2.html';
+        });
     }
-
-    // 监听热区点击事件
-    terminalArea.addEventListener('click', function (event) {
-      event.preventDefault();
-      // event.stopPropagation();
-      // 模拟操作成功，提示用户进行下一步
-      showMessage('选择正确，等待跳转下一个步骤！');
-      window.location.href = 'exampage1-2.html';
-    });
-  }
 </script>
 </body>

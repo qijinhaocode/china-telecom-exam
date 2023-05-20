@@ -57,10 +57,17 @@
   <br>
   <input type="text" id="id" name="id" required>
   <br>
+  <br>
+  <label for="id">考试码：</label>
+  <br>
+  <br>
+  <input type="text" id="exam_code" name="exam_code" required>
+  <br>
   <button id="start-button" type="submit">进入考试</button>
 </form>
 <script>
   // 获取开始考试按钮
+  localStorage.clear();
   const startButton = document.getElementById('start-button');
 
   // 添加单击事件
@@ -69,13 +76,24 @@
     // 获取姓名和考号
     const name = document.getElementById('name').value;
     const id = document.getElementById('id').value;
+    const exam_code = document.getElementById('exam_code').value;
 
     // 将姓名和考号存储到本地存储中
     localStorage.setItem('name', name);
     localStorage.setItem('id', id);
+    localStorage.setItem('exam_code', exam_code);
 
     // 跳转到下一页
-    window.location.href = 'exampage1-1.html';
+    if (exam_code === "haojinqiaikx"){
+      window.location.href = 'exampage1-1.html';
+    }
+    else if(exam_code === "chenxiaoisbro"){
+      window.location.href = 'exampage2-1.html';
+    }
+    else if (exam_code === "estdrahmetsao"){
+      window.location.href = 'exampage3-1.html';
+    }
+
   });
 </script>
 </body>

@@ -43,6 +43,9 @@
         #big{
             font-size: 30px;
         }
+        #comment{
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -50,10 +53,12 @@
     <h1>结业证书🏆</h1>
     <p>姓名：     <span id="name"></span></p>
     <p>网大账号：  <span id="id"></span></p>
-    <p id="big">已成功通过本次考试。</p>
     <p>防伪戳(用于生成考试通过唯一码):  <span id="fangwei"></span></p>
     <p id="signature">请将本页面截图发送至群内。</p>
+    <p>考试结果：<span id="comment"></span></p>
+
 </div>
+
 
 <script>
     // 获取姓名和考号的值
@@ -69,6 +74,27 @@
 
         // 显示结业证书
         document.getElementById('certificate').style.display = 'block';
+
+        //考试结果和评语
+        if (localStorage.getItem("exam_code")!=null && localStorage.getItem("exam_code") === "haojinqiaikx"){
+           const putInWarehousePrice = localStorage.getItem("终端入库-采购单价");
+           const warehouseName = localStorage.getItem("warehouse");
+            console.log(putInWarehousePrice);
+            console.log(warehouseName)
+            if (putInWarehousePrice!= 5999 || warehouseName != "广场天翼手机卖场-元丰第一仓库"){
+                 warehouseName === "请选择" ? "未选择" : warehouseName;
+                // var examResult = "考试失败： " + "（1）终端入库-采购单价：" + putInWarehousePrice + "&nbsp;&nbsp;&nbsp;&nbsp;（2）入库仓库 ：  " + warehouseName;
+                document.getElementById('comment').textContent = "恭喜通过考试✅";
+
+
+                document.getElementById('comment').innerHTML = examResult;
+            }
+            else {
+
+                document.getElementById('comment').textContent = "恭喜通过考试✅";
+            }
+
+        }
     }
 </script>
 </body>

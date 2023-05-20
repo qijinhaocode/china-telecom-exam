@@ -3,27 +3,43 @@
   <meta charset="UTF-8">
   <!-- 其他标签 -->
   <style>
-    #message {
-      display: none;
+    .warehouse select {
       position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
+      display: block;
+      top: 461px; /* 调整为热区的上边界位置 */
+      left: 189px; /* 调整为热区的左边界位置 */
+      width: 282px;
+      height: 44px;
+      background-color: white;
     }
-
-    #message:before {
-      content: "";
+    .date_current input {
       position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
+      display: block;
+      top: 461px; /* 调整为热区的上边界位置 */
+      left: 189px; /* 调整为热区的左边界位置 */
+      width: 282px;
+      height: 44px;
+      background-color: white;
+    }
+    .people input {
+      position: absolute;
+      display: block;
+      top: 461px; /* 调整为热区的上边界位置 */
+      left: 189px; /* 调整为热区的左边界位置 */
+      width: 282px;
+      height: 44px;
+      background-color: white;
+    }
+    .people_corner input {
+      position: absolute;
+      display: block;
+      top: 461px; /* 调整为热区的上边界位置 */
+      left: 189px; /* 调整为热区的左边界位置 */
+      width: 282px;
+      height: 44px;
+      background-image: url('peoplecorner.png');
+      color: white;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -38,8 +54,30 @@
     <area target="" alt="增加一行" title="增加一行" href="" coords="1698,739,1822,788" shape="rect">
     <area target="" alt="取消" title="取消" href="" coords="824,884,948,932" shape="rect">
     <area target="" alt="提交" title="提交" href="" coords="968,884,1091,929" shape="rect">
+    <area target="" alt="入库仓库" title="入库仓库" href="" coords="807,460,1248,499" shape="rect">
+    <area target="" alt="单据号" title="单据号" href="" coords="192,390,617,434" shape="rect">
+    <area target="" alt="制单人" title="制单人" href="" coords="809,387,1240,436" shape="rect">
+    <area target="" alt="制单日期" title="制单日期" href="" coords="1421,388,1854,432" shape="rect">
+    <area target="" alt="入库门店" title="入库门店" href="" coords="198,453,626,500" shape="rect">
+    <area target="" alt="经营主体" title="经营主体" href="" coords="1421,455,1861,502" shape="rect">
+    <area target="" alt="人" title="人" href="" coords="1586,156,1664,195" shape="rect">
   </map>
-  <div id="message">请选择正确的选项。</div>
+  <div class="warehouse">
+    <select>
+      <option value="请选择">请选择</option>
+      <option value="广场天翼手机卖场-元丰第一仓库">广场天翼手机卖场-元丰第一仓库</option>
+      <option value="广场天翼手机卖场-元丰第二仓库">广场天翼手机卖场-元丰第二仓库</option>
+    </select>
+  </div>
+  <div class="date_current">
+    <input type="text" placeholder="" disabled>
+  </div>
+  <div class="people">
+    <input type="text" placeholder="" disabled>
+  </div>
+  <div class="people_corner">
+    <input type="text" placeholder="" disabled>
+  </div>
 </div>
 <script>
   window.onload = function() {
@@ -59,6 +97,65 @@
     myImage.style.width = `${window.innerWidth - 100}px`;
     const newWidth = myImage.width;
     const widthRatio = newWidth / originalWidth;
+
+    const warehouseInputElement = document.querySelector('.warehouse select');
+    const hotAreaCoords3 = [807,460,1248,499];
+    warehouseInputElement.style.left = `${(hotAreaCoords3[0]) * widthRatio}px`;
+    warehouseInputElement.style.top = `${(hotAreaCoords3[1]) * widthRatio}px`;
+    warehouseInputElement.style.width = `${(hotAreaCoords3[2] - hotAreaCoords3[0]) * widthRatio}px`;
+    warehouseInputElement.style.height = `${(hotAreaCoords3[3] - hotAreaCoords3[1]) * widthRatio}px`;
+
+    warehouseInputElement.addEventListener("change", function() {
+      var selectedValue = this.value;
+      localStorage.setItem("warehouse", selectedValue);
+    });
+
+    const peopleMaker = document.querySelector('.people input');
+    const peopleMakerHotArea = [809,387,1240,436];
+    peopleMaker.style.left = `${(peopleMakerHotArea[0]) * widthRatio}px`;
+    peopleMaker.style.top = `${(peopleMakerHotArea[1]) * widthRatio}px`;
+    peopleMaker.style.width = `${(peopleMakerHotArea[2] - peopleMakerHotArea[0]) * widthRatio}px`;
+    peopleMaker.style.height = `${(peopleMakerHotArea[3] - peopleMakerHotArea[1]) * widthRatio}px`;
+
+    peopleMaker.value = localStorage.getItem('name');
+
+    const peopleMakerCorner = document.querySelector('.people_corner input');
+    const peopleMakerCornerHotArea = [1586,156,1664,195];
+    peopleMakerCorner.style.left = `${(peopleMakerCornerHotArea[0]) * widthRatio}px`;
+    peopleMakerCorner.style.top = `${(peopleMakerCornerHotArea[1]) * widthRatio}px`;
+    peopleMakerCorner.style.width = `${(peopleMakerCornerHotArea[2] - peopleMakerCornerHotArea[0]) * widthRatio}px`;
+    peopleMakerCorner.style.height = `${(peopleMakerCornerHotArea[3] - peopleMakerCornerHotArea[1]) * widthRatio}px`;
+
+    peopleMakerCorner.value = localStorage.getItem('name');
+
+    //日期获取当前系统日期显示
+    const inputElementDateCurrent = document.querySelector('.date_current input');
+    const hotAreaCoordsDateCurrent = [1421,388,1854,432];
+    inputElementDateCurrent.style.left = `${(hotAreaCoordsDateCurrent[0]) * widthRatio}px`;
+    inputElementDateCurrent.style.top = `${(hotAreaCoordsDateCurrent[1]) * widthRatio}px`;
+    inputElementDateCurrent.style.width = `${(hotAreaCoordsDateCurrent[2] - hotAreaCoordsDateCurrent[0]) * widthRatio}px`;
+    inputElementDateCurrent.style.height = `${(hotAreaCoordsDateCurrent[3] - hotAreaCoordsDateCurrent[1]) * widthRatio}px`;
+
+    var selectedValue = warehouseInputElement.options[warehouseInputElement.selectedIndex].value;
+    var selectedText = warehouseInputElement.options[warehouseInputElement.selectedIndex].text;
+    localStorage.setItem('warehouse', selectedText);
+
+    // Create a new Date object
+    var currentDate = new Date();
+
+// Get the current date and time components
+    var year = currentDate.getFullYear();
+    var month = currentDate.getMonth() + 1; // Note: January is 0
+    var day = currentDate.getDate();
+    var hours = currentDate.getHours();
+    var minutes = currentDate.getMinutes();
+    var seconds = currentDate.getSeconds();
+
+// Format the date and time as desired
+    var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+    inputElementDateCurrent.value = formattedDateTime;
+
 
     //3.适配屏幕之后的热区坐标
     const hotAreaCoords = [1698,739,1822,788];
@@ -81,24 +178,15 @@
 
     // 判断点击位置是否在热区范围内，如果不是则提示考试失败
     if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-      showMessage('考试失败！');
       window.location.href = 'newpage.html';
       message.style.display = 'block';
     }
   });
-  // 显示提示框并设置定时器自动隐藏
-  function showMessage(text) {
-    message.textContent = text;
-    message.style.display = 'block';
-    setTimeout(function() {
-      message.style.display = 'none';
-    }, 1000); // 3秒后自动隐藏
-  }
+
   // 监听热区点击事件
   terminalArea.addEventListener('click', function(event) {
     event.preventDefault();
     // 模拟操作成功，提示用户进行下一步
-    showMessage('选择正确，请进行下一步！');
     window.location.href = 'exampage1-3.html';
   });}
 </script>
