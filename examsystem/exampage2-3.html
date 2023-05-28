@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <!-- 其他标签 -->
     <style>
         #message {
             display: none;
@@ -48,7 +47,6 @@
         <area target="" alt="关闭" title="关闭" href="" coords="828,629,955,677" shape="rect">
         <area target="" alt="确定" title="确定" href="" coords="975,634,1099,677" shape="rect">
     </map>
-    <div id="message">请选择正确的选项。</div>
     <div class="image-container">
         <input type="text" placeholder="请输入...">
     </div>
@@ -99,19 +97,9 @@
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
         if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
 
-            showMessage('考试失败！');
             window.location.href = 'askadmin.html';
-            message.style.display = 'block';
         }
     });
-    // 显示提示框并设置定时器自动隐藏
-    function showMessage(text) {
-        message.textContent = text;
-        message.style.display = 'block';
-        setTimeout(function() {
-            message.style.display = 'none';
-        }, 1000); // 3秒后自动隐藏
-    }
     // 监听热区点击事件
     terminalArea.addEventListener('click', function(event) {
         event.preventDefault();
@@ -120,9 +108,7 @@
         const input = document.querySelector('input');
         const value = input.value;
 
-
         if (value == 864616052408596) {
-            showMessage('您输入的是：' + value + "请点击下一步操作");
             window.location.href = 'exampage2-4.html';
         }else{
             window.location.href = 'askadmin.html';

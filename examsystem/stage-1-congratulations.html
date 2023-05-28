@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>第一阶段考试</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
         body {
             text-align: center;
             background: linear-gradient(to bottom, #4b6cb7, #182848);
@@ -40,9 +39,6 @@
             font-size: 2em;
             text-align: right;
         }
-        #big{
-            font-size: 30px;
-        }
         #comment{
             color: red;
         }
@@ -75,22 +71,26 @@
         document.getElementById('certificate').style.display = 'block';
 
         //考试结果和评语
-        if (localStorage.getItem("exam_code")!=null && localStorage.getItem("exam_code") === "haojinqiaikx"){
-           const putInWarehousePrice = localStorage.getItem("终端入库-采购单价");
-           const warehouseName = localStorage.getItem("warehouse");
-            console.log(putInWarehousePrice);
-            console.log(warehouseName)
-            if (putInWarehousePrice!= 5999 || warehouseName != "广场天翼手机卖场-元丰第一仓库"){
-                 warehouseName === "请选择" ? "未选择" : warehouseName;
-                var examResult = "考试失败： " + "（1）终端入库-采购单价：" + putInWarehousePrice + "&nbsp;&nbsp;&nbsp;&nbsp;（2）入库仓库 ：  " + warehouseName;
-
-                document.getElementById('comment').innerHTML = examResult;
+        if (localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "haojinqiaikx") {
+            console.log("777")
+            const putInWarehousePrice = localStorage.getItem("终端入库-采购单价");
+            const warehouseName = localStorage.getItem("warehouse");
+            if (putInWarehousePrice !== 5999 || warehouseName !== "广场天翼手机卖场-元丰第一仓库") {
+                document.getElementById('comment').innerHTML = "考试失败： " + "（1）终端入库-采购单价：" + putInWarehousePrice + "&nbsp;&nbsp;&nbsp;&nbsp;（2）入库仓库 ：  " + warehouseName === "请选择" ? "未选择" : warehouseName;
             }
             else {
-
                 document.getElementById('comment').textContent = "恭喜通过考试✅";
             }
 
+        }
+        else if (localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "chenxiaoisbro") {
+            const putInWarehousePrice = localStorage.getItem("终端退库-采购单价");
+            if (putInWarehousePrice !== 5999){
+                document.getElementById('comment').innerHTML = "考试失败： " + "（1）终端退库-采购单价：" + putInWarehousePrice;
+            }
+            else {
+                document.getElementById('comment').textContent = "恭喜通过考试✅";
+            }
         }
     }
 </script>

@@ -99,45 +99,21 @@
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
         if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-            var x = event.clientX;
-            var y = event.clientY;
 
             // 记录点击位置到日志
-            console.log('ee点击坐标：X=' + x + ', Y=' + y);
-            console.log('ee', coords);
-            showMessage('考试失败！');
             window.location.href = 'askadmin.html';
             message.style.display = 'block';
         }
     });
-    // 显示提示框并设置定时器自动隐藏
-    function showMessage(text) {
-        message.textContent = text;
-        message.style.display = 'block';
-        setTimeout(function() {
-            message.style.display = 'none';
-        }, 1000); // 3秒后自动隐藏
-    }
+
     // 监听热区点击事件
     terminalArea.addEventListener('click', function(event) {
-        const x = event.offsetX;
-        const y = event.offsetY;
 
-        // 记录点击位置到日志
-        console.log('点击坐标：X=' + x + ', Y=' + y);
         event.preventDefault();
         const input = document.querySelector('input');
         const value = input.value;
-        console.log(value);
-
-        if (value == 5999) {
-            window.location.href = 'exampage2-6.html';
-        }
-        else {
-            console.log('======')
-            showMessage('考试失败！');
-            window.location.href = 'askadmin.html';
-        }
+        localStorage.setItem("终端退库-采购单价", value)
+        window.location.href = 'exampage2-6.html';
     });
 </script>
 </body>
