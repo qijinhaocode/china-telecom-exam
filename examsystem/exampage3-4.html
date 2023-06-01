@@ -235,25 +235,17 @@
     imageMap.addEventListener('click', function(event) {
         event.preventDefault();
         // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-        const scanHotArea = [603,507,472,461];
+        const scanHotArea = [812,801,950,849];
         const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
         if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
 
-            showMessage('考试失败！');
             window.location.href = 'askadmin.html';
             message.style.display = 'block';
         }
     });
-    // 显示提示框并设置定时器自动隐藏
-    function showMessage(text) {
-        message.textContent = text;
-        message.style.display = 'block';
-        setTimeout(function() {
-            message.style.display = 'none';
-        }, 1000); // 3秒后自动隐藏
-    }
+
 
     // 获取输入框元素
     const clientNameInput = document.querySelector('.image-container-client-name input');
@@ -286,41 +278,33 @@
         const promotionalDiscountAmount = parseFloat(promotionalDiscountAmountInput.value);
 
         // 校验售卖方式、建议零售价和促销优惠金额
-        if (saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800) {
+        // if (saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800) {
         // 计算实际销售金额
         const actualSalePrice = suggestSalePrice - promotionalDiscountAmount;
             console.log(actualSalePrice)
 
         // 显示实际销售金额
-            actualSaleAmount.value = "¥"+actualSalePrice.toFixed(2);
+            actualSaleAmount.value = "¥" + actualSalePrice.toFixed(2);
 
         setTimeout(function() {
             actualSaleAmount.style.display = 'block';
     }, 1000);
-    } else {
-        // actualSaleAmount.style.display = 'none';
-    }
+    // }
+    //     else {
+    //     // actualSaleAmount.style.display = 'none';
+    // }
     }
 
         // 校验捆绑号码与localStorage中的contact值是否一致
         const bindPhoneNumberInput = document.querySelector('.bind-phone-number input');
         bindPhoneNumberInput.addEventListener('input', validateBindPhoneNumber);
-
-        function validateBindPhoneNumber() {
-        if (bindPhoneNumberInput.value !== contact) {
-        showMessage('捆绑号码校验不通过！');
+    function validateBindPhoneNumber(event) {
+        const value = event.target.value;
+        localStorage.setItem("bind_phone", value);
     }
-    }
-
-        // 显示提示框并设置定时器自动隐藏
-        function showMessage(text) {
-        const message = document.getElementById('message');
-        message.textContent = text;
-        message.style.display = 'block';
-        setTimeout(function() {
-        message.style.display = 'none';
-    }, 1000);
-    }
+        // const value = bindPhoneNumberInput.value;
+        // //校验捆绑号码是否为联系人电话
+        // localStorage.setItem("bind_phone", value)
 
     // 监听热区点击事件
     terminalArea.addEventListener('click', function(event) {
@@ -329,20 +313,28 @@
         // 模拟操作成功，提示用户进行下一步
         const input = document.querySelector('input');
         const selectElement = document.querySelector('.sale-select select');
+        selectElement.addEventListener('change', handleSelectChange);
+
+        function handleSelectChange(event) {
+            const selectedValue = event.target.value;
+            // 执行你希望的操作，如存储到 localStorage
+            localStorage.setItem("saleMode", selectedValue);
+        }
         const suggestSalePriceInput = document.querySelector('.suggest-sale-price input');
         const promotionalDiscountAmountInput = document.querySelector('.promotional-discount-amount input');
         const actualSaleAmount = document.querySelector('.actual-price input');
         const bindPhoneNumberInput = document.querySelector('.bind-phone-number input');
         const saleMode = selectElement.value;
+        localStorage.setItem("bindPhoneNumberInput",saleMode);
         const suggestSalePrice = parseFloat(suggestSalePriceInput.value);
+        localStorage.setItem("suggestSalePrice",suggestSalePrice);
         const promotionalDiscountAmount = parseFloat(promotionalDiscountAmountInput.value);
+        localStorage.setItem("promotionalDiscountAmount",promotionalDiscountAmount);
         const actualSaleAmountValue = actualSaleAmount.value;
-
         if (saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800 && actualSaleAmountValue === "¥5199.00" && bindPhoneNumberInput.value === contact) {
-            console.log("++")
             window.location.href = 'exampage3-5.html';
         } else {
-            window.location.href = 'askadmin.html';
+            window.location.href = 'exampage3-5.html';
         }
     });
 </script>

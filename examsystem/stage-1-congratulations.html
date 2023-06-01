@@ -92,6 +92,30 @@
                 document.getElementById('comment').textContent = "恭喜通过考试✅";
             }
         }
+        else if(localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "estdrahmetsao"){
+            const bindPhone = localStorage.getItem("bind_phone");
+            const saleMode = localStorage.getItem("salemode");
+            var saleModeDes;
+            if (saleMode === "mode1") {
+                saleModeDes = "裸机销售";
+            } else if (saleMode === "mode2") {
+                saleModeDes = "合约机销售";
+            } else {
+                saleModeDes = "未选择";
+            }
+            const suggestSalePrice = localStorage.getItem("suggestSalePrice");
+            const promotionalDiscountAmount = localStorage.getItem("promotionalDiscountAmount");
+            const contact = localStorage.getItem('contact');
+            if (!(saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800  && bindPhoneNumberInput.value === contact)){
+                const combinedString = "绑定手机号码: " + bindPhone + "<br>"
+                    + "售卖方式: " + saleModeDes  + "<br>"
+                    + "建议零售价: " + suggestSalePrice + "<br>"
+                    + "促销优惠金额: " + promotionalDiscountAmount + "<br>"
+
+                document.getElementById('comment').innerHTML = combinedString;
+
+            }
+        }
     }
 </script>
 </body>
