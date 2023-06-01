@@ -67,8 +67,6 @@
 
             // 判断点击位置是否在热区范围内，如果不是则提示考试失败
             if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-
-                showMessage('考试失败！');
                 window.location.href = 'askadmin.html';
                 message.style.display = 'block';
             }

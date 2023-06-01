@@ -25,6 +25,7 @@
             left: 50%;
             margin-left: -10px;
         }
+
         .image-container input {
             position: absolute;
             display: block;
@@ -33,6 +34,7 @@
             width: 282px;
             height: 44px;
         }
+
         .image-container-client-name input {
             position: absolute;
             display: block;
@@ -42,6 +44,7 @@
             height: 44px;
             background-color: white;
         }
+
         .image-container-contact input {
             position: absolute;
             display: block;
@@ -51,6 +54,7 @@
             height: 44px;
             background-color: white;
         }
+
         .sale-select select {
             position: absolute;
             display: block;
@@ -60,6 +64,7 @@
             height: 44px;
             background-color: white;
         }
+
         .suggest-sale-price input {
             position: absolute;
             display: block;
@@ -68,6 +73,7 @@
             width: 282px;
             height: 44px;
         }
+
         .promotional-discount-amount input {
             position: absolute;
             display: block;
@@ -76,6 +82,7 @@
             width: 282px;
             height: 44px;
         }
+
         .bind-phone-number input {
             position: absolute;
             display: block;
@@ -84,6 +91,7 @@
             width: 282px;
             height: 44px;
         }
+
         .actual-price input {
             position: absolute;
             display: block;
@@ -110,7 +118,8 @@
         <area target="" alt="联系方式" title="联系方式" href="" coords="762,427,1119,469" shape="rect">
         <area target="" alt="备注" title="备注" href="" coords="273,489,1347,527" shape="rect">
         <area target="" alt="选购商品" title="选购商品" href="" coords="1735,552,1857,593" shape="rect">
-        <area target="" alt="售卖方式裸机销售下拉框" title="售卖方式裸机销售下拉框" href="" coords="527,676,675,711" shape="rect">
+        <area target="" alt="售卖方式裸机销售下拉框" title="售卖方式裸机销售下拉框" href="" coords="527,676,675,711"
+              shape="rect">
         <area target="" alt="建议零售价" title="建议零售价" href="" coords="721,676,879,710" shape="rect">
         <area target="" alt="促销优惠金额" title="促销优惠金额" href="" coords="926,679,1086,710" shape="rect">
         <area target="" alt="采购单价" title="采购单价" href="" coords="1140,678,1298,710" shape="rect">
@@ -139,13 +148,13 @@
         <input type="text" placeholder="请输入..." disabled>
     </div>
     <div class="suggest-sale-price">
-        <input type="text" placeholder="请输入..." >
+        <input type="text" placeholder="请输入...">
     </div>
     <div class="promotional-discount-amount">
-        <input type="text" placeholder="请输入..." >
+        <input type="text" placeholder="请输入...">
     </div>
     <div class="bind-phone-number">
-        <input type="text" placeholder="请输入..." >
+        <input type="text" placeholder="请输入...">
     </div>
     <div class="actual-price">
         <input type="text" placeholder="" disabled>
@@ -171,54 +180,53 @@
 
     //3.重新定位input框的位置根据图片分辨率大小
     const inputElement1 = document.querySelector('.image-container-client-name input');
-    const hotAreaCoords = [270,427,633,469];
+    const hotAreaCoords = [270, 427, 633, 469];
     inputElement1.style.left = `${(hotAreaCoords[0]) * widthRatio}px`;
     inputElement1.style.top = `${(hotAreaCoords[1]) * widthRatio}px`;
     inputElement1.style.width = `${(hotAreaCoords[2] - hotAreaCoords[0]) * widthRatio}px`;
     inputElement1.style.height = `${(hotAreaCoords[3] - hotAreaCoords[1]) * widthRatio}px`;
 
     const inputElement2 = document.querySelector('.image-container-contact input');
-    const hotAreaCoords2 = [762,427,1119,469];
+    const hotAreaCoords2 = [762, 427, 1119, 469];
     inputElement2.style.left = `${(hotAreaCoords2[0]) * widthRatio}px`;
     inputElement2.style.top = `${(hotAreaCoords2[1]) * widthRatio}px`;
     inputElement2.style.width = `${(hotAreaCoords2[2] - hotAreaCoords2[0]) * widthRatio}px`;
     inputElement2.style.height = `${(hotAreaCoords2[3] - hotAreaCoords2[1]) * widthRatio}px`;
 
     const selectElement2 = document.querySelector('.sale-select select');
-    const hotAreaCoords3 = [527,676,675,711];
+    const hotAreaCoords3 = [527, 676, 675, 711];
     selectElement2.style.left = `${(hotAreaCoords3[0]) * widthRatio}px`;
     selectElement2.style.top = `${(hotAreaCoords3[1]) * widthRatio}px`;
     selectElement2.style.width = `${(hotAreaCoords3[2] - hotAreaCoords3[0]) * widthRatio}px`;
     selectElement2.style.height = `${(hotAreaCoords3[3] - hotAreaCoords3[1]) * widthRatio}px`;
 
     const inputElement4 = document.querySelector('.suggest-sale-price input');
-    const hotAreaCoords4 = [721,676,879,710];
+    const hotAreaCoords4 = [721, 676, 879, 710];
     inputElement4.style.left = `${(hotAreaCoords4[0]) * widthRatio}px`;
     inputElement4.style.top = `${(hotAreaCoords4[1]) * widthRatio}px`;
     inputElement4.style.width = `${(hotAreaCoords4[2] - hotAreaCoords4[0]) * widthRatio}px`;
     inputElement4.style.height = `${(hotAreaCoords4[3] - hotAreaCoords4[1]) * widthRatio}px`;
 
     const inputElement5 = document.querySelector('.promotional-discount-amount input');
-    const hotAreaCoords5 = [926,679,1086,710];
+    const hotAreaCoords5 = [926, 679, 1086, 710];
     inputElement5.style.left = `${(hotAreaCoords5[0]) * widthRatio}px`;
     inputElement5.style.top = `${(hotAreaCoords5[1]) * widthRatio}px`;
     inputElement5.style.width = `${(hotAreaCoords5[2] - hotAreaCoords5[0]) * widthRatio}px`;
     inputElement5.style.height = `${(hotAreaCoords5[3] - hotAreaCoords5[1]) * widthRatio}px`;
 
     const inputElement6 = document.querySelector('.bind-phone-number input');
-    const hotAreaCoords6 = [1572,681,1753,715];
+    const hotAreaCoords6 = [1572, 681, 1753, 715];
     inputElement6.style.left = `${(hotAreaCoords6[0]) * widthRatio}px`;
     inputElement6.style.top = `${(hotAreaCoords6[1]) * widthRatio}px`;
     inputElement6.style.width = `${(hotAreaCoords6[2] - hotAreaCoords6[0]) * widthRatio}px`;
     inputElement6.style.height = `${(hotAreaCoords6[3] - hotAreaCoords6[1]) * widthRatio}px`;
 
     const inputElement7 = document.querySelector('.actual-price input');
-    const hotAreaCoords7 = [1340,674,1503,715];
+    const hotAreaCoords7 = [1340, 674, 1503, 715];
     inputElement7.style.left = `${(hotAreaCoords7[0]) * widthRatio}px`;
     inputElement7.style.top = `${(hotAreaCoords7[1]) * widthRatio}px`;
     inputElement7.style.width = `${(hotAreaCoords7[2] - hotAreaCoords7[0]) * widthRatio}px`;
     inputElement7.style.height = `${(hotAreaCoords7[3] - hotAreaCoords7[1]) * widthRatio}px`;
-
 
 
     //4.调整每一个热区坐标在调整分辨率之后
@@ -232,10 +240,10 @@
     });
 
     // 监听整个图片区域点击事件
-    imageMap.addEventListener('click', function(event) {
+    imageMap.addEventListener('click', function (event) {
         event.preventDefault();
         // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-        const scanHotArea = [812,801,950,849];
+        const scanHotArea = [812, 801, 950, 849];
         const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
@@ -260,54 +268,45 @@
     contactInput.value = contact || '';
 
 
-        // 获取元素
-        const selectElement = document.querySelector('.sale-select select');
-        const suggestSalePriceInput = document.querySelector('.suggest-sale-price input');
-        const promotionalDiscountAmountInput = document.querySelector('.promotional-discount-amount input');
-        const actualSaleAmount = document.querySelector('.actual-price input');
+    // 获取元素
+    const selectElement = document.querySelector('.sale-select select');
+    const suggestSalePriceInput = document.querySelector('.suggest-sale-price input');
+    const promotionalDiscountAmountInput = document.querySelector('.promotional-discount-amount input');
+    const actualSaleAmount = document.querySelector('.actual-price input');
 
-        // 监听下拉框和输入框的值变化
-        selectElement.addEventListener('change', calculateActualSaleAmount);
-        suggestSalePriceInput.addEventListener('input', calculateActualSaleAmount);
-        promotionalDiscountAmountInput.addEventListener('input', calculateActualSaleAmount);
+    // 监听下拉框和输入框的值变化
+    selectElement.addEventListener('change', calculateActualSaleAmount);
+    suggestSalePriceInput.addEventListener('input', calculateActualSaleAmount);
+    promotionalDiscountAmountInput.addEventListener('input', calculateActualSaleAmount);
 
-        function calculateActualSaleAmount() {
+    function calculateActualSaleAmount() {
         // 获取下拉框、建议零售价和促销优惠金额的值
         const saleMode = selectElement.value;
         const suggestSalePrice = parseFloat(suggestSalePriceInput.value);
         const promotionalDiscountAmount = parseFloat(promotionalDiscountAmountInput.value);
 
-        // 校验售卖方式、建议零售价和促销优惠金额
-        // if (saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800) {
-        // 计算实际销售金额
         const actualSalePrice = suggestSalePrice - promotionalDiscountAmount;
-            console.log(actualSalePrice)
+        console.log(actualSalePrice)
 
         // 显示实际销售金额
-            actualSaleAmount.value = "¥" + actualSalePrice.toFixed(2);
+        actualSaleAmount.value = "¥" + actualSalePrice.toFixed(2);
 
-        setTimeout(function() {
+        setTimeout(function () {
             actualSaleAmount.style.display = 'block';
-    }, 1000);
-    // }
-    //     else {
-    //     // actualSaleAmount.style.display = 'none';
-    // }
+        }, 1000);
+
     }
 
-        // 校验捆绑号码与localStorage中的contact值是否一致
-        const bindPhoneNumberInput = document.querySelector('.bind-phone-number input');
-        bindPhoneNumberInput.addEventListener('input', validateBindPhoneNumber);
+    const bindPhoneNumberInput = document.querySelector('.bind-phone-number input');
+    bindPhoneNumberInput.addEventListener('input', validateBindPhoneNumber);
+
     function validateBindPhoneNumber(event) {
         const value = event.target.value;
         localStorage.setItem("bind_phone", value);
     }
-        // const value = bindPhoneNumberInput.value;
-        // //校验捆绑号码是否为联系人电话
-        // localStorage.setItem("bind_phone", value)
 
     // 监听热区点击事件
-    terminalArea.addEventListener('click', function(event) {
+    terminalArea.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
         // 模拟操作成功，提示用户进行下一步
@@ -320,22 +319,16 @@
             // 执行你希望的操作，如存储到 localStorage
             localStorage.setItem("saleMode", selectedValue);
         }
+
         const suggestSalePriceInput = document.querySelector('.suggest-sale-price input');
         const promotionalDiscountAmountInput = document.querySelector('.promotional-discount-amount input');
-        const actualSaleAmount = document.querySelector('.actual-price input');
-        const bindPhoneNumberInput = document.querySelector('.bind-phone-number input');
         const saleMode = selectElement.value;
-        localStorage.setItem("saleMode",saleMode);
+        localStorage.setItem("saleMode", saleMode);
         const suggestSalePrice = parseFloat(suggestSalePriceInput.value);
-        localStorage.setItem("suggestSalePrice",suggestSalePrice);
+        localStorage.setItem("suggestSalePrice", suggestSalePrice);
         const promotionalDiscountAmount = parseFloat(promotionalDiscountAmountInput.value);
-        localStorage.setItem("promotionalDiscountAmount",promotionalDiscountAmount);
-        const actualSaleAmountValue = actualSaleAmount.value;
-        if (saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800 && actualSaleAmountValue === "¥5199.00" && bindPhoneNumberInput.value === contact) {
-            window.location.href = 'exampage3-5.html';
-        } else {
-            window.location.href = 'exampage3-5.html';
-        }
+        localStorage.setItem("promotionalDiscountAmount", promotionalDiscountAmount);
+        window.location.href = 'exampage3-5.html';
     });
 </script>
 </body>
