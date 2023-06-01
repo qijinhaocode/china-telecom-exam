@@ -1,41 +1,41 @@
 <head>
-  <meta charset="UTF-8">
-  <!-- 其他标签 -->
-  <style>
-  </style>
+    <meta charset="UTF-8">
+    <!-- 其他标签 -->
+    <style>
+    </style>
 </head>
 <body>
 <div style="position: relative;">
     <img id="myImage" src="exam2-6.png" usemap="#image-map">
 
-    <map  id="image-map"  name="image-map">
+    <map id="image-map" name="image-map">
         <area target="" alt="关闭" title="关闭" href="" coords="902,835,999,876" shape="rect">
         <area target="" alt="叉" title="叉" href="" coords="1269,382,1311,425" shape="rect">
     </map>
 </div>
 <script>
-  const imageMap = document.querySelector('map');
-  const terminalArea = imageMap.querySelector('area[alt="关闭"]');
-  const myImage = document.querySelector('#myImage');
+    const imageMap = document.querySelector('map');
+    const terminalArea = imageMap.querySelector('area[alt="关闭"]');
+    const myImage = document.querySelector('#myImage');
 
-  // 监听整个图片区域点击事件
-  imageMap.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 获取热区元素的位置信息
-      const hotAreaCoords = [902,835,999,876];
-      const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
+    // 监听整个图片区域点击事件
+    imageMap.addEventListener('click', function (event) {
+        event.preventDefault();
+        // 获取热区元素的位置信息
+        const hotAreaCoords = [902, 835, 999, 876];
+        const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-      window.location.href = 'askadmin.html';
-    }
-  });
+        // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+        if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+            window.location.href = 'askadmin.html';
+        }
+    });
 
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 模拟操作成功，提示用户进行下一步
-    window.location.href = 'stage-1-congratulations.html';
-  });
+    // 监听热区点击事件
+    terminalArea.addEventListener('click', function (event) {
+        event.preventDefault();
+        // 模拟操作成功，提示用户进行下一步
+        window.location.href = 'stage-1-congratulations.html';
+    });
 </script>
 </body>

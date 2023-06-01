@@ -25,6 +25,7 @@
             left: 50%;
             margin-left: -10px;
         }
+
         .image-container input {
             position: absolute;
             display: block;
@@ -63,9 +64,9 @@
         <area target="" alt="取消" title="取消" href="" coords="1036,904,1167,948" shape="rect">
     </map>
     <div id="message">请选择正确的选项。</div>
-<!--    <div class="image-container">-->
-<!--        <input type="text" placeholder="请输入...">-->
-<!--    </div>-->
+    <!--    <div class="image-container">-->
+    <!--        <input type="text" placeholder="请输入...">-->
+    <!--    </div>-->
 </div>
 <script>
 
@@ -104,10 +105,10 @@
     });
 
     // 监听整个图片区域点击事件
-    imageMap.addEventListener('click', function(event) {
+    imageMap.addEventListener('click', function (event) {
         event.preventDefault();
         // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-        const scanHotArea = [603,507,472,461];
+        const scanHotArea = [603, 507, 472, 461];
         const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败

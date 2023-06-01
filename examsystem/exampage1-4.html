@@ -1,90 +1,90 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <!-- 其他标签 -->
-  <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
+    <meta charset="UTF-8">
+    <!-- 其他标签 -->
+    <style>
+        #message {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            z-index: 1;
+            background-color: #e80a0a;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #888;
+        }
 
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
+        #message:before {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: #fff transparent transparent transparent;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
 
 
-  </style>
+    </style>
 </head>
 <body>
 <div style="position: relative;">
-  <img id="my-image" src="exam1-4.png" usemap="#image-map">
-  <map id="image-map" name="image-map">
-    <area target="" alt="" title="" href="" coords="469,460,603,507" shape="rect">
-    <area target="" alt="关闭" title="关闭" href="" coords="829,719,946,763" shape="rect">
-    <area target="" alt="确定" title="确定" href="" coords="974,713,1095,763" shape="rect">
-    <area target="" alt="TXT批量导入查询" title="TXT批量导入查询" href="" coords="632,460,866,505" shape="rect">
-    <area target="" alt="TXT模板下载" title="TXT模板下载" href="" coords="891,460,1120,504" shape="rect">
-  </map>
+    <img id="my-image" src="exam1-4.png" usemap="#image-map">
+    <map id="image-map" name="image-map">
+        <area target="" alt="" title="" href="" coords="469,460,603,507" shape="rect">
+        <area target="" alt="关闭" title="关闭" href="" coords="829,719,946,763" shape="rect">
+        <area target="" alt="确定" title="确定" href="" coords="974,713,1095,763" shape="rect">
+        <area target="" alt="TXT批量导入查询" title="TXT批量导入查询" href="" coords="632,460,866,505" shape="rect">
+        <area target="" alt="TXT模板下载" title="TXT模板下载" href="" coords="891,460,1120,504" shape="rect">
+    </map>
 </div>
 <script>
-  //获取热区图片
-  const imageMap = document.querySelector('map');
-  const terminalArea = imageMap.querySelector('area[alt="确定"]');
+    //获取热区图片
+    const imageMap = document.querySelector('map');
+    const terminalArea = imageMap.querySelector('area[alt="确定"]');
 
-  const myImage = document.querySelector('#my-image');
-  //根据屏幕大小调整图片大小 ，此处减了500px
-  myImage.style.width = `${window.innerWidth - 100}px`;
-  //重新设置热区
-  const originalWidth = 1920;
-  const originalHeight = 1004;
+    const myImage = document.querySelector('#my-image');
+    //根据屏幕大小调整图片大小 ，此处减了500px
+    myImage.style.width = `${window.innerWidth - 100}px`;
+    //重新设置热区
+    const originalWidth = 1920;
+    const originalHeight = 1004;
 
-  const newWidth = myImage.width;
-  const widthRatio = newWidth / originalWidth;
-  console.log("===",widthRatio)
+    const newWidth = myImage.width;
+    const widthRatio = newWidth / originalWidth;
+    console.log("===", widthRatio)
 
-  //调整每一个热区坐标在调整分辨率之后
-  const areas = document.querySelectorAll('#image-map area');
-  areas.forEach((area) => {
-    const coords = area.getAttribute('coords').split(',');
-    const newCoords = coords.map((coord) => {
-      console.log("==",widthRatio)
-      return coord * widthRatio
+    //调整每一个热区坐标在调整分辨率之后
+    const areas = document.querySelectorAll('#image-map area');
+    areas.forEach((area) => {
+        const coords = area.getAttribute('coords').split(',');
+        const newCoords = coords.map((coord) => {
+            console.log("==", widthRatio)
+            return coord * widthRatio
+        });
+        area.setAttribute('coords', newCoords.join(','));
     });
-    area.setAttribute('coords', newCoords.join(','));
-  });
 
-  // 监听整个图片区域点击事件
-  imageMap.addEventListener('click', function(event) {
-    event.preventDefault();
+    // 监听整个图片区域点击事件
+    imageMap.addEventListener('click', function (event) {
+        event.preventDefault();
 
-    // 获取确定热区元素的位置信息,点击这个按钮之外的元素都会跳转到error
-    const scanHotArea = [974,713,1095,763];
-    const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
+        // 获取确定热区元素的位置信息,点击这个按钮之外的元素都会跳转到error
+        const scanHotArea = [974, 713, 1095, 763];
+        const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
 
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-    if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1]|| event.clientY > newHotAreaCoords[3]){
-      window.location.href = 'newpage.html';
-    }
-  });
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'exampage1-5.html';
-  });
+        // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+        if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+            window.location.href = 'newpage.html';
+        }
+    });
+    // 监听热区点击事件
+    terminalArea.addEventListener('click', function (event) {
+        event.preventDefault();
+        window.location.href = 'exampage1-5.html';
+    });
 </script>
 </body>

@@ -1,104 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>欢迎进入考试</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
-    }
-    h1 {
-      color: #337ab7;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-    p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin: 20px 0;
-      color: #666;
-    }
-    form {
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      display: inline-block;
-    }
-    button {
-      background-color: #337ab7;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #23527c;
-    }
-    input {
-      margin: 10px 0;
-      padding: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>欢迎进入考试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #337ab7;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 20px 0;
+            color: #666;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: inline-block;
+        }
+
+        button {
+            background-color: #337ab7;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #23527c;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>欢迎进入考试</h1>
 <p>请输入您的姓名和网大账号以进入考试：</p>
-<form >
-  <label for="name">姓名：</label>
-  <br>
-  <input type="text" id="name" name="name" required>
-  <br>
-  <label for="id">网大账号：</label>
-  <br>
-  <input type="text" id="id" name="id" required>
-  <br>
-  <br>
-  <label for="id">考试码：</label>
-  <br>
-  <br>
-  <input type="text" id="exam_code" name="exam_code" required>
-  <br>
-  <button id="start-button" type="submit">进入考试</button>
+<form>
+    <label for="name">姓名：</label>
+    <br>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="id">网大账号：</label>
+    <br>
+    <input type="text" id="id" name="id" required>
+    <br>
+    <br>
+    <label for="id">考试码：</label>
+    <br>
+    <br>
+    <input type="text" id="exam_code" name="exam_code" required>
+    <br>
+    <button id="start-button" type="submit">进入考试</button>
 </form>
 <script>
-  // 获取开始考试按钮
-  localStorage.clear();
-  const startButton = document.getElementById('start-button');
+    // 获取开始考试按钮
+    localStorage.clear();
+    const startButton = document.getElementById('start-button');
 
-  // 添加单击事件
-  startButton.addEventListener('click', function(event) {
-    // 防止默认行为
-    event.preventDefault()
-    // 获取姓名和考号
-    const name = document.getElementById('name').value;
-    const id = document.getElementById('id').value;
-    const exam_code = document.getElementById('exam_code').value;
+    // 添加单击事件
+    startButton.addEventListener('click', function (event) {
+        // 防止默认行为
+        event.preventDefault()
+        // 获取姓名和考号
+        const name = document.getElementById('name').value;
+        const id = document.getElementById('id').value;
+        const exam_code = document.getElementById('exam_code').value;
 
-    // 将姓名和考号存储到本地存储中
-    localStorage.setItem('name', name);
-    localStorage.setItem('id', id);
-    localStorage.setItem('exam_code', exam_code);
+        // 将姓名和考号存储到本地存储中
+        localStorage.setItem('name', name);
+        localStorage.setItem('id', id);
+        localStorage.setItem('exam_code', exam_code);
 
-    // 跳转到下一页
-    if (exam_code === "haojinqiaikx"){
-      window.location.href = 'exampage1-1.html';
-    }
-    else if(exam_code === "chenxiaoisbro"){
-      window.location.href = 'exampage2-1.html';
-    }
-    else if (exam_code === "estdrahmetsao"){
-      window.location.href = 'exampage3-1.html';
-    }
-    else {
-      alert("考试码不正确，请重新输入！")
-    }
+        // 跳转到下一页
+        if (exam_code === "haojinqiaikx") {
+            window.location.href = 'exampage1-1.html';
+        } else if (exam_code === "chenxiaoisbro") {
+            window.location.href = 'exampage2-1.html';
+        } else if (exam_code === "estdrahmetsao") {
+            window.location.href = 'exampage3-1.html';
+        } else {
+            alert("考试码不正确，请重新输入！")
+        }
 
-  });
+    });
 </script>
 </body>
 </html>

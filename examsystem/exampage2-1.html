@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
+    <meta charset="UTF-8">
+    <style>
+        #message {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            z-index: 1;
+            background-color: #e80a0a;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #888;
+        }
 
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
-  </style>
+        #message:before {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: #fff transparent transparent transparent;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
+    </style>
 </head>
 <body>
 <div style="position: relative;">
-  <img id="myImage" src="exam2-1.png" usemap="#image-map">
+    <img id="myImage" src="exam2-1.png" usemap="#image-map">
 
-  <map id="image-map" name="image-map">
-      <area target="" alt="终端入库" title="终端入库" href="" coords="173,297,296,346" shape="rect">
-      <area target="" alt="终端退库" title="终端退库" href="" coords="175,353,285,396" shape="rect">
-      <area target="" alt="" title="" href="" coords="173,405,375,450" shape="rect">
-      <area target="" alt="连锁终端领用" title="连锁终端领用" href="" coords="175,457,331,496" shape="rect">
-      <area target="" alt="" title="" href="" coords="175,503,323,546" shape="rect">
-      <area target="" alt="" title="" href="" coords="396,301,506,342" shape="rect">
-      <area target="" alt="" title="" href="" coords="522,405,396,349" shape="rect">
-      <area target="" alt="" title="" href="" coords="623,305,768,344" shape="rect">
-      <area target="" alt="" title="" href="" coords="621,353,820,394" shape="rect">
-      <area target="" alt="" title="" href="" coords="619,403,807,440" shape="rect">
-      <area target="" alt="" title="" href="" coords="621,454,729,498" shape="rect">
-      <area target="" alt="" title="" href="" coords="948,347,851,303" shape="rect">
-      <area target="" alt="" title="" href="" coords="849,356,942,391" shape="rect">
-      <area target="" alt="" title="" href="" coords="848,405,942,446" shape="rect">
-      <area target="" alt="" title="" href="" coords="1067,302,1208,343" shape="rect">
-      <area target="" alt="" title="" href="" coords="1069,355,1214,394" shape="rect">
-      <area target="" alt="" title="" href="" coords="1063,401,1212,440" shape="rect">
-      <area target="" alt="" title="" href="" coords="1069,455,1177,490" shape="rect">
-  </map>
-  <div id="message">请选择正确的选项。</div>
+    <map id="image-map" name="image-map">
+        <area target="" alt="终端入库" title="终端入库" href="" coords="173,297,296,346" shape="rect">
+        <area target="" alt="终端退库" title="终端退库" href="" coords="175,353,285,396" shape="rect">
+        <area target="" alt="" title="" href="" coords="173,405,375,450" shape="rect">
+        <area target="" alt="连锁终端领用" title="连锁终端领用" href="" coords="175,457,331,496" shape="rect">
+        <area target="" alt="" title="" href="" coords="175,503,323,546" shape="rect">
+        <area target="" alt="" title="" href="" coords="396,301,506,342" shape="rect">
+        <area target="" alt="" title="" href="" coords="522,405,396,349" shape="rect">
+        <area target="" alt="" title="" href="" coords="623,305,768,344" shape="rect">
+        <area target="" alt="" title="" href="" coords="621,353,820,394" shape="rect">
+        <area target="" alt="" title="" href="" coords="619,403,807,440" shape="rect">
+        <area target="" alt="" title="" href="" coords="621,454,729,498" shape="rect">
+        <area target="" alt="" title="" href="" coords="948,347,851,303" shape="rect">
+        <area target="" alt="" title="" href="" coords="849,356,942,391" shape="rect">
+        <area target="" alt="" title="" href="" coords="848,405,942,446" shape="rect">
+        <area target="" alt="" title="" href="" coords="1067,302,1208,343" shape="rect">
+        <area target="" alt="" title="" href="" coords="1069,355,1214,394" shape="rect">
+        <area target="" alt="" title="" href="" coords="1063,401,1212,440" shape="rect">
+        <area target="" alt="" title="" href="" coords="1069,455,1177,490" shape="rect">
+    </map>
+    <div id="message">请选择正确的选项。</div>
 </div>
 <script>
     window.onload = function () {
@@ -69,7 +69,7 @@
         const widthRatio = newWidth / originalWidth;
 
         //3.适配屏幕之后的热区坐标
-        const hotAreaCoords = [175,353,285,396];
+        const hotAreaCoords = [175, 353, 285, 396];
         const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
         //4.调整每一个热区坐标在调整分辨率之后
@@ -86,18 +86,19 @@
         imageMap.addEventListener('click', function (event) {
             event.preventDefault();
 
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-      if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-      window.location.href = 'askadmin.html';
-      message.style.display = 'block';
-    }
-  });
+            // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+            if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+                window.location.href = 'askadmin.html';
+                message.style.display = 'block';
+            }
+        });
 
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-      // event.stopPropagation();
-    window.location.href = 'exampage2-2.html';
-  });}
+        // 监听热区点击事件
+        terminalArea.addEventListener('click', function (event) {
+            event.preventDefault();
+            // event.stopPropagation();
+            window.location.href = 'exampage2-2.html';
+        });
+    }
 </script>
 </body>

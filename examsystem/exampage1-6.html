@@ -7,7 +7,7 @@
 </head>
 <body>
 <div style="position: relative;">
-    <img id="myImage"  src="exam1-6.png" usemap="#image-map">
+    <img id="myImage" src="exam1-6.png" usemap="#image-map">
 
     <map id="image-map" name="image-map">
         <area target="" alt="关闭" title="关闭" href="" coords="909,837,1033,906" shape="rect">
@@ -16,56 +16,57 @@
     </div>
 </div>
 <script>
-    window.onload = function() {
+    window.onload = function () {
         const imageMap = document.querySelector('map');
-    const terminalArea = imageMap.querySelector('area[alt="关闭"]');
-    const myImage = document.querySelector('#myImage');
+        const terminalArea = imageMap.querySelector('area[alt="关闭"]');
+        const myImage = document.querySelector('#myImage');
 
 
-    //1.拿到原始图片的尺寸
-    const img = document.getElementById('myImage');
-    const originalWidth = img.width;
+        //1.拿到原始图片的尺寸
+        const img = document.getElementById('myImage');
+        const originalWidth = img.width;
 
 
-    //2.根据屏幕大小调整图片大小 ，此处减了500px
-    myImage.style.width = `${window.innerWidth - 100}px`;
-    const newWidth = myImage.width;
-    const widthRatio = newWidth / originalWidth;
+        //2.根据屏幕大小调整图片大小 ，此处减了500px
+        myImage.style.width = `${window.innerWidth - 100}px`;
+        const newWidth = myImage.width;
+        const widthRatio = newWidth / originalWidth;
 
-    //3.适配屏幕之后的热区坐标
-    const hotAreaCoords = [909,837,1033,906];
-    const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
+        //3.适配屏幕之后的热区坐标
+        const hotAreaCoords = [909, 837, 1033, 906];
+        const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
-    //4.调整每一个热区坐标在调整分辨率之后
-    const areas = document.querySelectorAll('#image-map area');
-    areas.forEach((area) => {
-        const coords = area.getAttribute('coords').split(',');
-        const newCoords = coords.map((coord) => {
-            return coord * widthRatio
+        //4.调整每一个热区坐标在调整分辨率之后
+        const areas = document.querySelectorAll('#image-map area');
+        areas.forEach((area) => {
+            const coords = area.getAttribute('coords').split(',');
+            const newCoords = coords.map((coord) => {
+                return coord * widthRatio
+            });
+            area.setAttribute('coords', newCoords.join(','));
+            console.log(newCoords)
         });
-        area.setAttribute('coords', newCoords.join(','));
-        console.log(newCoords)
-    });
 
 
-    // 监听整个图片区域点击事件
-    imageMap.addEventListener('click', function (event) {
-        event.preventDefault();
-        // 获取热区元素的位置信息
-        const rect = '909,837,1033,906'; // 矩形热区的coords属性值
-        const coords = rect.split(',').map(Number);
+        // 监听整个图片区域点击事件
+        imageMap.addEventListener('click', function (event) {
+            event.preventDefault();
+            // 获取热区元素的位置信息
+            const rect = '909,837,1033,906'; // 矩形热区的coords属性值
+            const coords = rect.split(',').map(Number);
 
-        // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-        if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
-            window.location.href = 'askadmin.html';
-        }
-    });
+            // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+            if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+                window.location.href = 'askadmin.html';
+            }
+        });
 
-    // 监听热区点击事件
-    terminalArea.addEventListener('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        window.location.href = 'stage-1-congratulations.html';
-    });}
+        // 监听热区点击事件
+        terminalArea.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            window.location.href = 'stage-1-congratulations.html';
+        });
+    }
 </script>
 </body>

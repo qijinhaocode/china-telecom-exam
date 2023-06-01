@@ -25,6 +25,7 @@
             left: 50%;
             margin-left: -10px;
         }
+
         .image-container input {
             position: absolute;
             display: block;
@@ -86,10 +87,10 @@
     });
 
     // 监听整个图片区域点击事件
-    imageMap.addEventListener('click', function(event) {
+    imageMap.addEventListener('click', function (event) {
         event.preventDefault();
         // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-        const scanHotArea = [952,940,1086,984];
+        const scanHotArea = [952, 940, 1086, 984];
         const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
@@ -101,7 +102,7 @@
     });
 
     // 监听热区点击事件
-    terminalArea.addEventListener('click', function(event) {
+    terminalArea.addEventListener('click', function (event) {
         event.preventDefault();
         event.stopPropagation();
         // 模拟操作成功，提示用户进行下一步

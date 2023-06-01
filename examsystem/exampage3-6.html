@@ -25,6 +25,7 @@
             left: 50%;
             margin-left: -10px;
         }
+
         .image-container input {
             position: absolute;
             display: block;
@@ -33,6 +34,7 @@
             width: 282px;
             height: 44px;
         }
+
         #end-exam-btn {
             position: absolute;
             display: inline-block;
@@ -60,12 +62,14 @@
     <img id="my-image" src="exam3-6.png" usemap="#image-map">
 
     <map id="image-map" name="image-map">
-        <area target="" alt="请输入要查询的串号" title="请输入要查询的串号" href="" coords="236,360,673,410" shape="rect">
+        <area target="" alt="请输入要查询的串号" title="请输入要查询的串号" href="" coords="236,360,673,410"
+              shape="rect">
         <area target="" alt="查询" title="查询" href="" coords="677,358,809,412" shape="rect">
         <area target="" alt="TXT批量导入" title="TXT批量导入" href="" coords="831,358,1018,410" shape="rect">
         <area target="" alt="导出" title="导出" href="" coords="1038,356,1158,410" shape="rect">
         <area target="" alt="串码状态列表" title="串码状态列表" href="" coords="22,563,1873,614" shape="rect">
-        <area target="" alt="串码操作流程裸机销售" title="串码操作流程裸机销售" href="" coords="22,755,1878,807" shape="rect">
+        <area target="" alt="串码操作流程裸机销售" title="串码操作流程裸机销售" href="" coords="22,755,1878,807"
+              shape="rect">
     </map>
     <div id="message">请选择正确的选项。</div>
     <div class="end">
@@ -100,10 +104,10 @@
     });
 
     // 监听整个图片区域点击事件
-    imageMap.addEventListener('click', function(event) {
+    imageMap.addEventListener('click', function (event) {
         event.preventDefault();
         // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-        const scanHotArea = [603,507,472,461];
+        const scanHotArea = [603, 507, 472, 461];
         const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
         // 判断点击位置是否在热区范围内，如果不是则提示考试失败
@@ -121,7 +125,7 @@
     endExamBtn.style.left = leftPosition + 'px';
 
     // 监听热区点击事件
-    endExamBtn.addEventListener('click', function() {
+    endExamBtn.addEventListener('click', function () {
         // 在这里添加点击事件的逻辑
         window.location.href = 'stage-1-congratulations.html';
     });

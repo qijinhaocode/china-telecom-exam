@@ -1,144 +1,146 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <!-- 其他标签 -->
-  <style>
-    #message {
-      display: none;
-      position: absolute;
-      top: 150px;
-      left: 100px;
-      z-index: 1;
-      background-color: #e80a0a;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px #888;
-    }
+    <meta charset="UTF-8">
+    <!-- 其他标签 -->
+    <style>
+        #message {
+            display: none;
+            position: absolute;
+            top: 150px;
+            left: 100px;
+            z-index: 1;
+            background-color: #e80a0a;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #888;
+        }
 
-    #message:before {
-      content: "";
-      position: absolute;
-      border-style: solid;
-      border-width: 10px 10px 0 10px;
-      border-color: #fff transparent transparent transparent;
-      top: -10px;
-      left: 50%;
-      margin-left: -10px;
-    }
-    .image-container-client-name input {
-      position: absolute;
-      display: block;
-      top: 461px; /* 调整为热区的上边界位置 */
-      left: 189px; /* 调整为热区的左边界位置 */
-      width: 282px;
-      height: 44px;
-    }
-    .image-container-contact input {
-      position: absolute;
-      display: block;
-      top: 461px; /* 调整为热区的上边界位置 */
-      left: 189px; /* 调整为热区的左边界位置 */
-      width: 282px;
-      height: 44px;
-    }
+        #message:before {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: #fff transparent transparent transparent;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
 
-  </style>
+        .image-container-client-name input {
+            position: absolute;
+            display: block;
+            top: 461px; /* 调整为热区的上边界位置 */
+            left: 189px; /* 调整为热区的左边界位置 */
+            width: 282px;
+            height: 44px;
+        }
+
+        .image-container-contact input {
+            position: absolute;
+            display: block;
+            top: 461px; /* 调整为热区的上边界位置 */
+            left: 189px; /* 调整为热区的左边界位置 */
+            width: 282px;
+            height: 44px;
+        }
+
+    </style>
 </head>
 <body>
 <div style="position: relative;">
-  <img id="my-image" src="exam3-2.png" usemap="#image-map">
+    <img id="my-image" src="exam3-2.png" usemap="#image-map">
 
-  <map id="image-map" name="image-map">
-    <area target="" alt="客户姓名" title="客户姓名" href="" coords="261,445,619,485" shape="rect">
-    <area target="" alt="联系方式" title="联系方式" href="" coords="750,443,1109,486" shape="rect">
-    <area target="" alt="备注" title="备注" href="" coords="258,506,1342,550" shape="rect">
-    <area target="" alt="选购商品" title="选购商品" href="" coords="1732,574,1850,616" shape="rect">
-    <area target="" alt="提交订单" title="提交订单" href="" coords="806,783,941,835" shape="rect">
-    <area target="" alt="取消" title="取消" href="" coords="962,786,1094,835" shape="rect">
-  </map>
-  <div id="message">请选择正确的选项。</div>
-  <div class="image-container-client-name">
-    <input type="text" placeholder="请输入...">
-  </div>
-  <div class="image-container-contact">
-    <input type="text" placeholder="请输入...">
-  </div>
+    <map id="image-map" name="image-map">
+        <area target="" alt="客户姓名" title="客户姓名" href="" coords="261,445,619,485" shape="rect">
+        <area target="" alt="联系方式" title="联系方式" href="" coords="750,443,1109,486" shape="rect">
+        <area target="" alt="备注" title="备注" href="" coords="258,506,1342,550" shape="rect">
+        <area target="" alt="选购商品" title="选购商品" href="" coords="1732,574,1850,616" shape="rect">
+        <area target="" alt="提交订单" title="提交订单" href="" coords="806,783,941,835" shape="rect">
+        <area target="" alt="取消" title="取消" href="" coords="962,786,1094,835" shape="rect">
+    </map>
+    <div id="message">请选择正确的选项。</div>
+    <div class="image-container-client-name">
+        <input type="text" placeholder="请输入...">
+    </div>
+    <div class="image-container-contact">
+        <input type="text" placeholder="请输入...">
+    </div>
 </div>
 <script>
 
-  //获取热区图片
-  const imageMap = document.querySelector('map');
-  const terminalArea = imageMap.querySelector('area[alt="选购商品"]');
-  const myImage = document.querySelector('#my-image');
+    //获取热区图片
+    const imageMap = document.querySelector('map');
+    const terminalArea = imageMap.querySelector('area[alt="选购商品"]');
+    const myImage = document.querySelector('#my-image');
 
-  //1.根据屏幕大小调整图片大小 ，此处减了500px
-  myImage.style.width = `${window.innerWidth - 100}px`;
+    //1.根据屏幕大小调整图片大小 ，此处减了500px
+    myImage.style.width = `${window.innerWidth - 100}px`;
 
-  //2.重新设置热区
-  const originalWidth = 1920;
-  const originalHeight = 1004;
+    //2.重新设置热区
+    const originalWidth = 1920;
+    const originalHeight = 1004;
 
-  const newWidth = myImage.width;
-  const widthRatio = newWidth / originalWidth;
+    const newWidth = myImage.width;
+    const widthRatio = newWidth / originalWidth;
 
-  //3.重新定位input框的位置根据图片分辨率大小
-  const inputElement1 = document.querySelector('.image-container-client-name input');
-  const hotAreaCoords = [261,445,619,485];
-  inputElement1.style.left = `${(hotAreaCoords[0]) * widthRatio}px`;
-  inputElement1.style.top = `${(hotAreaCoords[1]) * widthRatio}px`;
-  inputElement1.style.width = `${(hotAreaCoords[2] - hotAreaCoords[0]) * widthRatio}px`;
-  inputElement1.style.height = `${(hotAreaCoords[3] - hotAreaCoords[1]) * widthRatio}px`;
+    //3.重新定位input框的位置根据图片分辨率大小
+    const inputElement1 = document.querySelector('.image-container-client-name input');
+    const hotAreaCoords = [261, 445, 619, 485];
+    inputElement1.style.left = `${(hotAreaCoords[0]) * widthRatio}px`;
+    inputElement1.style.top = `${(hotAreaCoords[1]) * widthRatio}px`;
+    inputElement1.style.width = `${(hotAreaCoords[2] - hotAreaCoords[0]) * widthRatio}px`;
+    inputElement1.style.height = `${(hotAreaCoords[3] - hotAreaCoords[1]) * widthRatio}px`;
 
-  const inputElement2 = document.querySelector('.image-container-contact input');
-  const hotAreaCoords2 = [750,443,1109,486];
-  inputElement2.style.left = `${(hotAreaCoords2[0]) * widthRatio}px`;
-  inputElement2.style.top = `${(hotAreaCoords2[1]) * widthRatio}px`;
-  inputElement2.style.width = `${(hotAreaCoords2[2] - hotAreaCoords2[0]) * widthRatio}px`;
-  inputElement2.style.height = `${(hotAreaCoords2[3] - hotAreaCoords2[1]) * widthRatio}px`;
+    const inputElement2 = document.querySelector('.image-container-contact input');
+    const hotAreaCoords2 = [750, 443, 1109, 486];
+    inputElement2.style.left = `${(hotAreaCoords2[0]) * widthRatio}px`;
+    inputElement2.style.top = `${(hotAreaCoords2[1]) * widthRatio}px`;
+    inputElement2.style.width = `${(hotAreaCoords2[2] - hotAreaCoords2[0]) * widthRatio}px`;
+    inputElement2.style.height = `${(hotAreaCoords2[3] - hotAreaCoords2[1]) * widthRatio}px`;
 
-  //4.调整每一个热区坐标在调整分辨率之后
-  const areas = document.querySelectorAll('#image-map area');
-  areas.forEach((area) => {
-    const coords = area.getAttribute('coords').split(',');
-    const newCoords = coords.map((coord) => {
-      return coord * widthRatio
+    //4.调整每一个热区坐标在调整分辨率之后
+    const areas = document.querySelectorAll('#image-map area');
+    areas.forEach((area) => {
+        const coords = area.getAttribute('coords').split(',');
+        const newCoords = coords.map((coord) => {
+            return coord * widthRatio
+        });
+        area.setAttribute('coords', newCoords.join(','));
     });
-    area.setAttribute('coords', newCoords.join(','));
-  });
 
-  // 监听整个图片区域点击事件
-  imageMap.addEventListener('click', function(event) {
-    event.preventDefault();
-    // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
-    const scanHotArea = [1732,574,1850,616];
-    const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
+    // 监听整个图片区域点击事件
+    imageMap.addEventListener('click', function (event) {
+        event.preventDefault();
+        // 获取热区元素的·位置信息,点击这个按钮之外的元素都会跳转到error
+        const scanHotArea = [1732, 574, 1850, 616];
+        const newHotAreaCoords = scanHotArea.map(coord => coord * widthRatio);
 
-    // 判断点击位置是否在热区范围内，如果不是则提示考试失败
-    if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
+        // 判断点击位置是否在热区范围内，如果不是则提示考试失败
+        if (event.clientX < newHotAreaCoords[0] || event.clientX > newHotAreaCoords[2] || event.clientY < newHotAreaCoords[1] || event.clientY > newHotAreaCoords[3]) {
 
-      window.location.href = 'askadmin.html';
-      message.style.display = 'block';
-    }
-  });
+            window.location.href = 'askadmin.html';
+            message.style.display = 'block';
+        }
+    });
 
-  const clientNameInput = document.querySelector('.image-container-client-name input');
-  const contactInput = document.querySelector('.image-container-contact input');
+    const clientNameInput = document.querySelector('.image-container-client-name input');
+    const contactInput = document.querySelector('.image-container-contact input');
 
-  // 当输入框内容改变时存储它们的值到 localStorage
-  clientNameInput.addEventListener('input', function() {
-    localStorage.setItem('clientName', this.value);
-  });
+    // 当输入框内容改变时存储它们的值到 localStorage
+    clientNameInput.addEventListener('input', function () {
+        localStorage.setItem('clientName', this.value);
+    });
 
-  contactInput.addEventListener('input', function() {
-    localStorage.setItem('contact', this.value);
-  });
-  // 监听热区点击事件
-  terminalArea.addEventListener('click', function(event) {
-    event.preventDefault();
-    // event.stopPropagation();
-    // 模拟操作成功，提示用户进行下一步
+    contactInput.addEventListener('input', function () {
+        localStorage.setItem('contact', this.value);
+    });
+    // 监听热区点击事件
+    terminalArea.addEventListener('click', function (event) {
+        event.preventDefault();
+        // event.stopPropagation();
+        // 模拟操作成功，提示用户进行下一步
 
-    window.location.href = 'exampage3-3-1.html';
-  });
+        window.location.href = 'exampage3-3-1.html';
+    });
 </script>
 </body>

@@ -47,7 +47,7 @@
     <div id="message">请选择正确的选项。</div>
 </div>
 <script>
-    window.onload = function() {
+    window.onload = function () {
         const imageMap = document.querySelector('map');
         const terminalArea = imageMap.querySelector('area[alt="裸机销售"]');
         // const message = document.querySelector('#message');
@@ -65,7 +65,7 @@
         const widthRatio = newWidth / originalWidth;
 
         //3.适配屏幕之后的热区坐标
-        const hotAreaCoords = [166,349,260,393];
+        const hotAreaCoords = [166, 349, 260, 393];
         const newHotAreaCoords = hotAreaCoords.map(coord => coord * widthRatio);
 
 //4.调整每一个热区坐标在调整分辨率之后
