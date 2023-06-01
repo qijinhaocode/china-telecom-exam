@@ -9,46 +9,52 @@
             background: linear-gradient(to bottom, #4b6cb7, #182848);
             color: #333;
         }
+
         #certificate {
             width: 70%;
             margin: 50px auto;
             padding: 30px 20px;
             border: 2px solid #ccc;
             border-radius: 20px;
-            box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
             background-size: cover;
             background-color: #fff;
             background-image: url('https://example.com/flower-border.png'); /* 替换为你想要的花边图片的 URL */
             background-repeat: repeat;
         }
+
         h1 {
             font-size: 2.5em;
             text-align: center;
             color: #2c3e50;
             margin-bottom: 20px;
         }
+
         p {
             font-size: 1.2em;
             margin-bottom: 10px;
         }
+
         span {
             font-weight: 600;
         }
+
         #signature {
             margin-top: 50px;
             font-size: 2em;
             text-align: right;
         }
-        #comment{
+
+        #comment {
             color: red;
         }
     </style>
 </head>
 <body>
 <div id="certificate" style="display: none;">
-    <p>姓名：     <span id="name"></span></p>
-    <p>网大账号：  <span id="id"></span></p>
-    <p>防伪戳(用于生成考试通过唯一码):  <span id="fangwei"></span></p>
+    <p>姓名： <span id="name"></span></p>
+    <p>网大账号： <span id="id"></span></p>
+    <p>防伪戳(用于生成考试通过唯一码): <span id="fangwei"></span></p>
     <p id="signature">请将本页面截图发送至群内。</p>
     <p>考试结果：<span id="comment"></span></p>
 
@@ -77,24 +83,20 @@
             const warehouseName = localStorage.getItem("warehouse");
             if (putInWarehousePrice !== 5999 || warehouseName !== "广场天翼手机卖场-元丰第一仓库") {
                 document.getElementById('comment').innerHTML = "考试失败： " + "（1）终端入库-采购单价：" + putInWarehousePrice + "&nbsp;&nbsp;&nbsp;&nbsp;（2）入库仓库 ：  " + warehouseName === "请选择" ? "未选择" : warehouseName;
-            }
-            else {
+            } else {
                 document.getElementById('comment').textContent = "恭喜通过考试✅";
             }
 
-        }
-        else if (localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "chenxiaoisbro") {
+        } else if (localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "chenxiaoisbro") {
             const putInWarehousePrice = localStorage.getItem("终端退库-采购单价");
-            if (putInWarehousePrice !== 5999){
+            if (putInWarehousePrice !== 5999) {
                 document.getElementById('comment').innerHTML = "考试失败： " + "（1）终端退库-采购单价：" + putInWarehousePrice;
-            }
-            else {
+            } else {
                 document.getElementById('comment').textContent = "恭喜通过考试✅";
             }
-        }
-        else if(localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "estdrahmetsao"){
+        } else if (localStorage.getItem("exam_code") != null && localStorage.getItem("exam_code") === "estdrahmetsao") {
             const bindPhone = localStorage.getItem("bind_phone");
-            const saleMode = localStorage.getItem("salemode");
+            const saleMode = localStorage.getItem("saleMode");
             var saleModeDes;
             if (saleMode === "mode1") {
                 saleModeDes = "裸机销售";
@@ -106,16 +108,18 @@
             const suggestSalePrice = localStorage.getItem("suggestSalePrice");
             const promotionalDiscountAmount = localStorage.getItem("promotionalDiscountAmount");
             const contact = localStorage.getItem('contact');
-            if (!(saleMode === 'mode1' && suggestSalePrice === 5999 && promotionalDiscountAmount === 800  && bindPhoneNumberInput.value === contact)){
+            if (!(saleMode === 'mode1' && suggestSalePrice == 5999 && promotionalDiscountAmount == 800 && bindPhone === contact)) {
                 const combinedString = "绑定手机号码: " + bindPhone + "<br>"
-                    + "售卖方式: " + saleModeDes  + "<br>"
+                    + "售卖方式: " + saleModeDes + "<br>"
                     + "建议零售价: " + suggestSalePrice + "<br>"
                     + "促销优惠金额: " + promotionalDiscountAmount + "<br>"
 
                 document.getElementById('comment').innerHTML = combinedString;
-
+            } else {
+                document.getElementById('comment').textContent = "恭喜通过考试✅";
             }
         }
+
     }
 </script>
 </body>
